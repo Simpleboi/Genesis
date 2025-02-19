@@ -1,0 +1,28 @@
+# Node modules
+/node_modules/
+
+# TypeScript build directory
+/dist/
+
+# Log files
+*.log
+
+# Mac system files
+.DS_Store
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# Environment variables
+.env
+
+# Jest or Mocha test coverage
+/coverage/
+
+# npm package lock
+package-lock.json
+yarn.lock
+
+# Build artifacts
+*.tsbuildinfo
