@@ -6,7 +6,15 @@ export enum TokenType {
     EQUALS,
     LEFTPAREN,
     RIGHTPAREN,
-    BINARYOPERATIONS,
+    SEMICOLON,
+    COLON,
+    PLUS,
+    MINUS,
+    TIMES,
+    DIVIDE,
+    KEYWORD,
+    LEFTBRACKET,
+    RIGHTBRACKET,
     EOF
 }
 
@@ -14,5 +22,3 @@ export interface Token {
     value: string;
     type: TokenType;
 }
-
-
