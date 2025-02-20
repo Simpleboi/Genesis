@@ -19,6 +19,7 @@
     "watch": "tsc --watch",
     "dev": "ts-node-dev src/index.ts",
     "clean": "rimraf dist",
+    "grammar": "npx nearleyc src/grammar/grammar.ne -o src/grammar/grammar.js",
     "publish": "npm publish --access public"
   },
   "keywords": [
@@ -35,6 +36,7 @@
     "@babel/preset-env": "^7.26.9",
     "@eslint/js": "^9.20.0",
     "@types/jest": "^29.5.14",
+    "@types/nearley": "^2.11.5",
     "@types/node": "^22.13.4",
     "eslint": "^9.20.1",
     "globals": "^15.15.0",
