@@ -1,11 +1,18 @@
 // Token Definition
 
-export type Token = 
-| {type: "NUMBER"; value: string}
-| {type: "PLUS"}
-| {type: "MINUS"}
-| {type: "TIMES"}
-| {type: "DIVIDE"}
-| {type: "LEFTPAREN"}
-| {type: "RIGHTPAREN"}
-| {type: "EOF"} // End of File
+export enum TokenType {
+    NUMBER,
+    VARIABLE,
+    EQUALS,
+    LEFTPAREN,
+    RIGHTPAREN,
+    BINARYOPERATIONS,
+    EOF
+}
+
+export interface Token {
+    value: string;
+    type: TokenType;
+}
+
+

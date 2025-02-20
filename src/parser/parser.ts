@@ -6,6 +6,7 @@ import * as grammar from "../grammar/grammar.js";
 function Parse(input: string) {
   const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar));
 
+
   // Feed the input to the parser
   parser.feed(input);
 
@@ -13,6 +14,6 @@ function Parse(input: string) {
   return parser.results;
 }
 
-const input = "123";
+const input = " 3 + 4";
 const results = Parse(input);
 console.log(results);
