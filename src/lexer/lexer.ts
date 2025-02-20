@@ -1,40 +1,43 @@
-// src/lexer/lexer.ts
-
 import { TokenType, Token } from './tokens';
-import { readNumbers } from './lexerHelpers/readNumbers';
-import { readSymbols } from './lexerHelpers/readSymbols';
-import { peek, addToken, skipWhiteSpace, advance } from './lexerUtils';
+import {
+  peek,
+  addToken,
+  skipWhiteSpace,
+  advance,
+  initializeLexer,
+} from './lexerUtils';
+import { readDataType } from './lexerHelpers/readDataType';
 
 export function Lexer(input: string): Token[] {
-    const tokens: Token[] = [];
-    let currentIndex = 0;
+  const tokens: Token[] = [];
+  let currentIndex = 0;
 
-    while (currentIndex < input.length) {
-      skipWhiteSpace();
+  // Initialize the lexer
+  initializeLexer(input);
 
-      const currentChar = peek();
+  while (currentIndex < input.length) {
+    // Skip white space
+    skipWhiteSpace();
 
-      // Handle variable names (e.g., x, num)
-      if (/[a-zA-Z_]/.test(currentChar!)) {
-        let value = "";
-        while (/[a-zA-Z0-9_]/.test(peek()!)) {
-            value += peek();
-            advance();
-        }
-        
-        // Handle keywords like 'int', 'let', etc.
-        if (value === 'int') {
-            addToken(TokenType.KEYWORD, value);  // Treat as keyword
-        } else {
-            addToken(TokenType.VARIABLE, value); // Regular variable
-        }
-        continue;
+    // Check for data types (like "int", "bool")
+    const dataTypeToken = readDataType(input, currentIndex);
+    if (dataTypeToken) {
+      addToken(TokenType.DATA_TYPE, dataTypeToken.value);
+      currentIndex = dataTypeToken.index;
+      continue;
     }
-    }    
 
-    return tokens;
+    // if no match found, advance the index
+    advance();
+
+    // Handle End Of File or unexpected characters
+    if (currentIndex >= input.length) {
+      break;
+    }
+  }
+
+  return tokens;
 }
 
-
-let test = "int num = 10;";
-console.log(Lexer(test))
+let test = 'int num = 10;';
+console.log(Lexer(test));

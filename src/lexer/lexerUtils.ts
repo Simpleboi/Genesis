@@ -8,6 +8,7 @@ let _currentIndex = 0;
 export function initializeLexer(newInput: string) {
   _input = newInput;
   _tokens.length = 0;
+  _currentIndex = 0;
 }
 
 // Function to peek at the current character without advancing
