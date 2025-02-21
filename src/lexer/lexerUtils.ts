@@ -27,6 +27,7 @@ export function advance(): string | null {
 // Function to Add a token to the array
 export function addToken(type: TokenType, value: string) {
   _tokens.push({ type, value }); 
+  _currentIndex += value.length;
 }
 
 // Function to skipe whitespace characters

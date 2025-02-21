@@ -52,18 +52,9 @@ export function Lexer(input: string): Token[] {
 
     // Read Symbols 
     if (readSymbols()) {
-      console.log(`we found a match ${currentChar}`);
       currentIndex++;
       continue;
     }
-
-    // if (/[=+\-*/;]/.test(currentChar)) {
-    //   tokens.push({ type: TokenType.VARIABLE, value: currentChar }); // Add the operator token.
-    //   currentIndex++;
-    //   continue;
-    // }
-
-    // If no match, log the character
 
     // Advance the token
     currentIndex++;
@@ -73,7 +64,7 @@ export function Lexer(input: string): Token[] {
   return _tokens;
 }
 
-let test = '+-';
+let test = '[]{}@#';
 let tokens = Lexer(test);
 
 tokens.forEach((element) => {

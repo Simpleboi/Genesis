@@ -15,6 +15,10 @@ export enum TokenType {
     KEYWORD,           // for, while
     LEFTBRACKET,       // [
     RIGHTBRACKET,      // ]
+    LEFTCURLY,         // {
+    RIGHTCURLY,        // }
+    DIRECTIVE,         // @
+    COMMENT,           // #
     DATA_TYPE,          // int, char, string
     EOF             
 }
