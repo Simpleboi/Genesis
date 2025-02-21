@@ -1,6 +1,5 @@
 import { Token, TokenType } from './tokens';
 
-
 let _input = '';
 export let _tokens: Token[] = [];
 let _currentIndex = 0;

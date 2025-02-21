@@ -3,7 +3,6 @@ import { Token, TokenType } from '../tokens';
 // Valid Data Types
 const dataTypes = ['int', 'string', 'float', 'bool', 'char'];
 
-
 // Function to read data types 
 export function readDataType(input: string, currentIndex: number): {type: TokenType, value: string, index: number} | null {
     let value = "";
