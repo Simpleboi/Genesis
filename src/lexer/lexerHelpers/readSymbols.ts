@@ -1,27 +1,28 @@
-import { TokenType, Token } from "../tokens";
-
+import { peek, addToken } from '../lexerUtils';
+import { TokenType } from '../tokens';
 
 // Function to read symbols (operators, paren, etc)
-export function readSymbols(src: string, currentIndex: number): [Token, number] | null {
-    
-    const char = src[currentIndex];
+export function readSymbols(): boolean {
+  let currentChar = peek();
+  console.log(`The value of peek is: ${currentChar}`);
 
-    switch (char) {
-        case "=":
-            return [{type: TokenType.EQUALS, value: "="}, currentIndex + 1];
-        
-        case "(":
-            return [{type: TokenType.LEFTPAREN, value: "="}, currentIndex + 1];
-        
-        case ")":
-            return [{type: TokenType.RIGHTPAREN, value: "="}, currentIndex + 1]
-        
-        case "+":
-        case "-":
-        case "*":
-        case "/":
-        
-        default:
-            return null;
-    }
+  switch (currentChar) {
+    case '+':
+      console.log('did we see the plus sign?');
+      addToken(TokenType.PLUS, currentChar);
+      console.log(`Did we add the token: ${currentChar}`);
+      return true;
+    case '-':
+      console.log('did we see the minus sign?');
+      addToken(TokenType.MINUS, currentChar);
+      return true;
+    case '*':
+      addToken(TokenType.TIMES, currentChar);
+      return true;
+    case '/':
+      addToken(TokenType.DIVIDE, currentChar);
+      return true;
+    default:
+      return false;
+  }
 }

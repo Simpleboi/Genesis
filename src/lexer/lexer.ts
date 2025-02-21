@@ -1,24 +1,22 @@
 import { TokenType, Token } from './tokens';
-import {
-  peek,
-  addToken,
-  skipWhiteSpace,
-  advance,
-  initializeLexer,
-} from './lexerUtils';
-import { readDataType } from './lexerHelpers/readDataType';
+import { initializeLexer, _tokens } from './lexerUtils';
+import { readSymbols } from './lexerHelpers/readSymbols';
 
 export function Lexer(input: string): Token[] {
-  const tokens: Token[] = []; // This will hold our tokens.
-  let currentIndex = 0; // To keep track of where we are in the string.
+  // To keep track of where we are in the string.
+  let currentIndex = 0;
+
+  // Initialize the lexer
+  initializeLexer(input);
 
   while (currentIndex < input.length) {
-    const currentChar = input[currentIndex]; // Look at the current character.
+    // Look at the current character.
+    let currentChar = input[currentIndex];
 
     // Skip spaces
     if (/\s/.test(currentChar)) {
       currentIndex++; // Move to the next character if it's a space.
-      continue; // Skip the rest and go back to the top of the loop.
+      continue; 
     }
 
     // Check for numbers
@@ -52,22 +50,30 @@ export function Lexer(input: string): Token[] {
       continue;
     }
 
-    // Check for operators (like "+" or "=")
-    if (/[=+\-*/;]/.test(currentChar)) {
-      tokens.push({ type: TokenType.VARIABLE, value: currentChar }); // Add the operator token.
+    // Read Symbols 
+    if (readSymbols()) {
+      console.log(`we found a match ${currentChar}`);
       currentIndex++;
       continue;
     }
 
-    // If no match, just skip it (you can add error handling here)
+    // if (/[=+\-*/;]/.test(currentChar)) {
+    //   tokens.push({ type: TokenType.VARIABLE, value: currentChar }); // Add the operator token.
+    //   currentIndex++;
+    //   continue;
+    // }
+
+    // If no match, log the character
+
+    // Advance the token
     currentIndex++;
   }
 
   // Return the array of tokens
-  return tokens;
+  return _tokens;
 }
 
-let test = 'int num = 10;';
+let test = '+-';
 let tokens = Lexer(test);
 
 tokens.forEach((element) => {
