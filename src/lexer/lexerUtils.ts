@@ -1,7 +1,7 @@
 import { Token, TokenType } from './tokens';
 
 let _input = '';
-let _currentIndex = 0;
+export let _currentIndex = 0;
 export let _tokens: Token[] = [];
 
 export function initializeLexer(newInput: string) {
@@ -17,7 +17,7 @@ export function peek() {
 
 // Function to Advance the current index to the next character
 export function advance(): string | null {
-  const currentChar = peek();
+  let currentChar = peek();
   if (currentChar !== null) {
     _currentIndex++;
   }
@@ -32,8 +32,7 @@ export function addToken(type: TokenType, value: string) {
 
 // Function to skipe whitespace characters
 export function skipWhiteSpace() {
-  if (/\s/.test(_input[_currentIndex])) {
+  while (/\s/.test(peek())) {
     advance();
-    _currentIndex++;
   }
 }

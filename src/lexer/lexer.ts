@@ -1,39 +1,39 @@
 import { TokenType, Token } from './tokens';
-import { initializeLexer, _tokens, advance } from './lexerUtils';
+import {
+  initializeLexer,
+  _tokens,
+  skipWhiteSpace,
+  peek,
+  _currentIndex,
+  advance,
+} from './lexerUtils';
 import { readSymbols } from './lexerHelpers/readSymbols';
 import { readNumbers } from './lexerHelpers/readNumbers';
 
 export function Lexer(input: string): Token[] {
-  // To keep track of where we are in the string.
-  let currentIndex = 0;
-
   // Initialize the lexer
   initializeLexer(input);
 
-  while (currentIndex < input.length) {
+  while (_currentIndex < input.length) {
     // Look at the current character
-    let currentChar = input[currentIndex];
+    let currentChar = peek();
 
-    // Skip white spaces
-    if (/\s/.test(currentChar)) {
-      advance();
-      currentIndex++;
-      continue;
-    }
+    // Skip over whitespace
+    skipWhiteSpace();
 
     // Check for numbers
-    if (/\d/.test(currentChar)) {
-      let number = ''; // Start building the number token.
+    // if (/\d/.test(currentChar)) {
+    //   let number = ''; // Start building the number token.
 
-      // Keep adding digits to the number token.
-      while (currentIndex < input.length && /\d/.test(input[currentIndex])) {
-        number += input[currentIndex];
-        currentIndex++;
-      }
+    //   // Keep adding digits to the number token.
+    //   while (currentIndex < input.length && /\d/.test(input[currentIndex])) {
+    //     number += input[currentIndex];
+    //     currentIndex++;
+    //   }
 
-      _tokens.push({ type: TokenType.NUMBER, value: number }); // Add the number token.
-      continue;
-    }
+    //   _tokens.push({ type: TokenType.NUMBER, value: number }); // Add the number token.
+    //   continue;
+    // }
 
     // Check for words (like "int", "num")
     if (/[a-zA-Z]/.test(currentChar)) {
@@ -41,11 +41,10 @@ export function Lexer(input: string): Token[] {
 
       // Keep adding letters to the word token.
       while (
-        currentIndex < input.length &&
-        /[a-zA-Z]/.test(input[currentIndex])
+        _currentIndex < input.length &&
+        /[a-zA-Z]/.test(input[_currentIndex])
       ) {
-        word += input[currentIndex];
-        currentIndex++;
+        word += input[_currentIndex];
       }
 
       tokens.push({ type: TokenType.KEYWORD, value: word }); // Add the word token.
@@ -54,20 +53,20 @@ export function Lexer(input: string): Token[] {
 
     // Read Symbols
     if (readSymbols()) {
-      currentIndex++;
       continue;
     }
 
     // Read Numbers
-    // if (readNumbers()) {
-    //   currentIndex++;
-    //   continue;
-    // }
+    if (readNumbers()) {
+      continue;
+    }
 
-    // Advance the token
-    currentIndex++;
+    console.log(`Unexpected Character: ${currentChar}`)
+    advance();
   }
 
+  // Add the EOF token at the end
+  _tokens.push({type: TokenType.EOF, value: ""});
   // Return the array of tokens
   return _tokens;
 }
