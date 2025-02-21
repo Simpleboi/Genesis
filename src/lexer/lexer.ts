@@ -1,6 +1,7 @@
 import { TokenType, Token } from './tokens';
-import { initializeLexer, _tokens } from './lexerUtils';
+import { initializeLexer, _tokens, advance } from './lexerUtils';
 import { readSymbols } from './lexerHelpers/readSymbols';
+import { readNumbers } from './lexerHelpers/readNumbers';
 
 export function Lexer(input: string): Token[] {
   // To keep track of where we are in the string.
@@ -10,13 +11,14 @@ export function Lexer(input: string): Token[] {
   initializeLexer(input);
 
   while (currentIndex < input.length) {
-    // Look at the current character.
+    // Look at the current character
     let currentChar = input[currentIndex];
 
-    // Skip spaces
+    // Skip white spaces
     if (/\s/.test(currentChar)) {
-      currentIndex++; // Move to the next character if it's a space.
-      continue; 
+      advance();
+      currentIndex++;
+      continue;
     }
 
     // Check for numbers
@@ -29,7 +31,7 @@ export function Lexer(input: string): Token[] {
         currentIndex++;
       }
 
-      tokens.push({ type: TokenType.NUMBER, value: number }); // Add the number token.
+      _tokens.push({ type: TokenType.NUMBER, value: number }); // Add the number token.
       continue;
     }
 
@@ -50,11 +52,17 @@ export function Lexer(input: string): Token[] {
       continue;
     }
 
-    // Read Symbols 
+    // Read Symbols
     if (readSymbols()) {
       currentIndex++;
       continue;
     }
+
+    // Read Numbers
+    // if (readNumbers()) {
+    //   currentIndex++;
+    //   continue;
+    // }
 
     // Advance the token
     currentIndex++;
@@ -64,7 +72,7 @@ export function Lexer(input: string): Token[] {
   return _tokens;
 }
 
-let test = '[]{}@#';
+let test = '10 20';
 let tokens = Lexer(test);
 
 tokens.forEach((element) => {

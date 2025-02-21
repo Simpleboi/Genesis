@@ -1,4 +1,5 @@
-import { TokenType, Token } from "../tokens";
+import { addToken, advance, peek } from "../lexerUtils";
+import { TokenType } from "../tokens";
 
 // Function to check if the character is a digit
 export function isDigit(char: string): boolean {
@@ -6,20 +7,21 @@ export function isDigit(char: string): boolean {
 }
 
 // Function to read numbers (tokenize the number portion)
-export function readNumbers(src: string, currentIndex: number): [Token, number] | null {
-    let value = "";
-    let index = currentIndex;
+export function readNumbers(): boolean {
+    let currentChar = peek();
 
-    // Read characters until a non-digit is encountered
-    while (isDigit(src[index])) {
-        value += src[index];
-        index++;
+    if (/\d/.test(currentChar)) {
+        // to build the number token
+        let number = "";
+
+        // Keep adding digits
+        while (/\d/.test(peek())) {
+            number += peek();
+            advance();
+        }
+
+        addToken(TokenType.NUMBER, number);
+        return true;
     }
-
-    if (value) {
-        const token: Token = {type: TokenType.NUMBER, value};
-        return [token, index]
-    }
-
-    return null;
+    return false;
 }

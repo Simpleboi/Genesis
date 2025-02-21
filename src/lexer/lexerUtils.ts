@@ -32,7 +32,8 @@ export function addToken(type: TokenType, value: string) {
 
 // Function to skipe whitespace characters
 export function skipWhiteSpace() {
-  while (peek() && /\s/.test(peek()!)) {
+  if (/\s/.test(_input[_currentIndex])) {
     advance();
+    _currentIndex++;
   }
 }
