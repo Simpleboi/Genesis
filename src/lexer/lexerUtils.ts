@@ -12,7 +12,7 @@ export function initializeLexer(newInput: string) {
 
 // Function to peek at the current character without advancing
 export function peek() {
-  return _input[_currentIndex];
+  return _currentIndex < _input.length ? _input[_currentIndex] : null;
 }
 
 // Function to Advance the current index to the next character
@@ -32,7 +32,7 @@ export function addToken(type: TokenType, value: string) {
 
 // Function to skipe whitespace characters
 export function skipWhiteSpace() {
-  while (/\s/.test(peek())) {
+  while (peek() !== null && /\s/.test(peek()!)) {
     advance();
   }
 }

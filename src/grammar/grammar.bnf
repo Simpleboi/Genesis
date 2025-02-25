@@ -1,0 +1,39 @@
+// Grammar for Genesis Programming Language
+
+<program> ::= <statement>*
+
+<statement> ::= <declaration> | <assignment> | <if_statement> | <for_loop> | <function_definition> | <function_call>
+
+<declaration> ::= <data_type> <identifier> "=" <expression> ";"
+
+<assignment> ::= <identifier> "=" <expression> ";"
+
+<if_statement> ::= "if" "(" <expression> ")" "{" <statement>* "}" ("else" "{" <statement>* "}")?
+
+<for_loop> ::= "for" "(" <declaration> ";" <expression> ";" <expression> ")" "{" <statement>* "}"
+
+<function_definition> ::= "function" <identifier> "(" <parameter_list> ")" "{" <statement>* "}"
+
+<parameter_list> ::= <data_type> <identifier> ("," <data_type> <identifier>)*
+
+<function_call> ::= <identifier> "(" <argument_list> ")"
+
+<argument_list> ::= <expression> ("," <expression>)*
+
+<data_type> ::= "int" | "float" | "string" | "boolean"
+
+<expression> ::= <identifier> | <number> | <string> | <boolean> | <expression> <operator> <expression>
+
+<operator> ::= "+" | "-" | "*" | "/" | "%" | "==" | "!=" | "<" | ">" | "<=" | ">=" | "&&" | "||" | "!"
+
+<identifier> ::= <letter> (<letter> | <digit>)*
+
+<number> ::= <digit>+ ("." <digit>+)?
+
+<string> ::= "\"" (<any character except \")+ "\""
+
+<boolean> ::= "true" | "false"
+
+<digit> ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+
+<letter> ::= "a" | "b" | "c" | ... | "z" | "A" | "B" | "C" | ... | "Z"
