@@ -9,24 +9,36 @@ const KEYWORDS: string[] = [
   'elif',
   'break',
   'continue',
+  'int',
+  'main',
 ];
 
 export function readKeywords(): boolean {
   let currentChar = peek();
+
+  // If no character left or it's not a letter/underscore, return false
+  if (!currentChar || !/[a-zA-Z_]/.test(currentChar)) {
+    return false;
+  }
+
   let word = '';
 
-  // if the first character is a letter, it could be a keyword or an identifier
-  if (/[a-zA-Z_]/.test(currentChar)) {
-    while (/[a-zA-Z_0-9]/.test(peek())) {
-      word += peek();
-      advance();
-    }
+  while (true) {
+    currentChar = peek();
 
-    // Check if the word is a reserved keyword
-    if (KEYWORDS.includes(word)) {
-      addToken(TokenType.KEYWORD, word);
-      return true;
+    // If we're out of characters or the character isn't [a-zA-Z0-9_], break
+    if (!currentChar || !/[a-zA-Z0-9_]/.test(currentChar)) {
+      break;
     }
+    word += currentChar;
+    advance();
   }
-  return false;
+
+  if (KEYWORDS.includes(word)) {
+    addToken(TokenType.KEYWORD, word);
+  } else {
+    addToken(TokenType.IDENTIFIER, word);
+  }
+
+  return true;
 }

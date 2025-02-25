@@ -10,12 +10,12 @@ export function isDigit(char: string): boolean {
 export function readNumbers(): boolean {
     let currentChar = peek();
 
-    if (/\d/.test(currentChar)) {
+    if (/\d/.test(currentChar!)) {
         // to build the number token
         let number = "";
 
         // Keep adding digits
-        while (/\d/.test(peek())) {
+        while (/\d/.test(peek()!)) {
             number += peek();
             advance();
         }

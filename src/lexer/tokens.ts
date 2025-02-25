@@ -19,7 +19,8 @@ export enum TokenType {
     RIGHTCURLY,        // }
     DIRECTIVE,         // @
     COMMENT,           // #
-    DATA_TYPE,          // int, char, string
+    DATA_TYPE,         // int, char, string
+    IDENTIFIER,
     EOF             
 }
 

@@ -16,23 +16,25 @@ export function peek() {
 }
 
 // Function to Advance the current index to the next character
-export function advance(): string | null {
-  let currentChar = peek();
-  if (currentChar !== null) {
+export function advance(): void {
+  if (_currentIndex < _input.length) {
     _currentIndex++;
   }
-  return currentChar;
 }
 
 // Function to Add a token to the array
 export function addToken(type: TokenType, value: string) {
-  _tokens.push({ type, value }); 
-  _currentIndex += value.length;
+  _tokens.push({ type, value });
 }
 
 // Function to skipe whitespace characters
 export function skipWhiteSpace() {
-  while (peek() !== null && /\s/.test(peek()!)) {
+  while (true) {
+    let currentChar = peek();
+
+    if (currentChar === null || !/\s/.test(currentChar)) {
+      break;
+    }
     advance();
   }
 }

@@ -11,8 +11,6 @@ import { readSymbols } from './lexerHelpers/readSymbols';
 import { readNumbers } from './lexerHelpers/readNumbers';
 import { readKeywords } from './lexerHelpers/readKeywords';
 
-console.log("starting the program");
-
 export function Lexer(input: string): Token[] {
   // Initialize the lexer
   initializeLexer(input);
@@ -21,6 +19,7 @@ export function Lexer(input: string): Token[] {
     // Look at the current character
     let currentChar = peek();
 
+    
     // Skip over whitespace
     skipWhiteSpace();
 
@@ -38,35 +37,21 @@ export function Lexer(input: string): Token[] {
     //   continue;
     // }
 
-    // Check for words (like "int", "num")
-    // if (/[a-zA-Z]/.test(currentChar)) {
-    //   let word = ''; // Start building the word token.
-
-    //   // Keep adding letters to the word token.
-    //   while (
-    //     _currentIndex < input.length &&
-    //     /[a-zA-Z]/.test(input[_currentIndex])
-    //   ) {
-    //     word += input[_currentIndex];
-    //   }
-
-    //   tokens.push({ type: TokenType.KEYWORD, value: word }); // Add the word token.
-    //   continue;
-    // }
-
-    console.log("did we make it to readKeywords?");
     // Read Keywords
     if (readKeywords()) {
+      console.log(`Keyword found and token added`);
       continue;
     }
 
     // Read Symbols
     if (readSymbols()) {
+      console.log(`Symbol found and token added`);
       continue;
     }
 
     // Read Numbers
     if (readNumbers()) {
+      console.log(`Symbol found and token added`);
       continue;
     }
 
@@ -80,7 +65,7 @@ export function Lexer(input: string): Token[] {
   return _tokens;
 }
 
-let test = 'int main';
+let test = 'int = main';
 let tokens = Lexer(test);
 
 tokens.forEach((element) => {
