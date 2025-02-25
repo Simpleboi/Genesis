@@ -1,7 +1,3 @@
-// Function to Print to the console
-export function log(...args: any): void {
-  console.log(...args);
-}
 
 // Function to generate a range of numbers (python's range)
 
