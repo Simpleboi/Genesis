@@ -1,7 +1,7 @@
 {
   "name": "genesis",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "directories": {
     "doc": "docs",
     "test": "tests"
@@ -51,5 +51,9 @@
   },
   "dependencies": {
     "nearley": "^2.20.1"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./stdlib": "./dist/src/lib/index.js"
   }
 }
