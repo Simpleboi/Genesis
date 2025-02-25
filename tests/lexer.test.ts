@@ -25,7 +25,7 @@ import { TokenType } from '../src/lexer/tokens';
 
 // Testing for Operators
 test('Lexer correctly tokenizes operators', () => {
-  const input = '+ - * /';
+  const input = '+-*/';
   const tokens = Lexer(input);
 
   expect(tokens).toEqual([

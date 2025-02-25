@@ -1,4 +1,4 @@
-import { Token, TokenType } from '../tokens';
+import { TokenType } from '../tokens';
 
 // Valid Data Types
 const dataTypes = ['int', 'string', 'float', 'bool', 'char'];

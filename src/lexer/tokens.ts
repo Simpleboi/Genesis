@@ -3,7 +3,7 @@
 export enum TokenType {
     NUMBER,            // for numbers like 10, 20
     VARIABLE,          // for variables like "num"
-    EQUALS,            // =
+    EQUALS,            // ==
     LEFTPAREN,         // (
     RIGHTPAREN,        // )
     SEMICOLON,         // ;
@@ -20,7 +20,8 @@ export enum TokenType {
     DIRECTIVE,         // @
     COMMENT,           // #
     DATA_TYPE,         // int, char, string
-    IDENTIFIER,
+    IDENTIFIER,        // some words
+    ASSIGNMENT,        // =
     EOF             
 }
 

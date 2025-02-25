@@ -1,0 +1,42 @@
+Refer to the "ast.json" file in the same directory for this example. 
+
+[Program] is the root node, contaiing an array of statements. Each statement can be one of the statement interfaces (VariableDeclaration, IfStatement, WhileStatement, etc). 
+
+Statements often contain expressions (BinaryExpressions, CallExpression, etc) or references to identifiers.
+
+The example used in the "ast.json" file is for:
+    "int x = 5 + 2;"
+
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "VariableDeclaration",
+      "identifier": "x",
+      "varType": "int",
+      "initializer": {
+        "type": "BinaryExpression",
+        "operator": "+",
+        "left": {
+          "type": "Literal",
+          "value": 5
+        },
+        "right": {
+          "type": "Literal",
+          "value": 2
+        }
+      }
+    }
+  ]
+}
+
+
+In this example [Program] is the root node with [body] containing one statement.
+
+[VariableDeclaration] declares a variable called "x". 
+and [initializer] is a [BinaryExpression] for 5 + 2;
+
+                            ~~~
+
+This AST structure is the foundation for representing 
+Genesis programs in a tree form. 
