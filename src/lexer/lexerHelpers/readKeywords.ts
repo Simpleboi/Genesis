@@ -1,17 +1,7 @@
 import { TokenType } from '../tokens';
 import { peek, advance, addToken } from '../lexerUtils';
-
-const KEYWORDS: string[] = [
-  'for',
-  'while',
-  'if',
-  'else',
-  'elif',
-  'break',
-  'continue',
-  'int',
-  'main',
-];
+import { KEYWORDS } from './keywords';
+import { DATA_TYPE } from './dataTypes';
 
 export function readKeywords(): boolean {
   let currentChar = peek();
@@ -36,7 +26,11 @@ export function readKeywords(): boolean {
 
   if (KEYWORDS.includes(word)) {
     addToken(TokenType.KEYWORD, word);
-  } else {
+  } 
+  else if (DATA_TYPE.includes(word)) {
+    addToken(TokenType.DATA_TYPE, word);
+  } 
+  else {
     addToken(TokenType.IDENTIFIER, word);
   }
 

@@ -23,27 +23,27 @@ export function readSymbols(): boolean {
       advance();
       return true;
     case '(':
-      addToken(TokenType.LEFTPAREN, currentChar);
+      addToken(TokenType.LEFT_PAREN, currentChar);
       advance();
       return true;
     case ')':
-      addToken(TokenType.RIGHTPAREN, currentChar);
+      addToken(TokenType.RIGHT_PAREN, currentChar);
       advance();
       return true;
     case '[':
-      addToken(TokenType.LEFTBRACKET, currentChar);
+      addToken(TokenType.LEFT_BRACKET, currentChar);
       advance();
       return true;
     case ']':
-      addToken(TokenType.RIGHTBRACKET, currentChar);
+      addToken(TokenType.RIGHT_BRACKET, currentChar);
       advance();
       return true;
     case '{':
-      addToken(TokenType.LEFTCURLY, currentChar);
+      addToken(TokenType.LEFT_CURLY, currentChar);
       advance();
       return true;
     case '}':
-      addToken(TokenType.RIGHTCURLY, currentChar);
+      addToken(TokenType.RIGHT_CURLY, currentChar);
       advance();
       return true;
     case '#':
