@@ -1,6 +1,8 @@
 
 # Genesis Programming Language
 
+## This language is NOT production ready yet, and as a result, most features will not work. Wait for version 1.0 of Genesis to be released
+
 Genesis is a **general-purpose** programming language designed for simplicity, stricter-typing, expressiveness, and easy integration with existing JavaScript ecosystems. It **transpiles** to JavaScript, so you can use it anywhere JS runs (in browsers, Node.js, etc.) without needing a separate runtime.
 
 ## Table of Contents

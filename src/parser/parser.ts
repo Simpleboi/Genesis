@@ -49,10 +49,10 @@ export function consume(tokenType: TokenType, errMessage: string): Token {
 }
 
 export function consumeOneOf(
-  tokenTypes: TokenType[],
+  types: TokenType[],
   errMessage: string,
 ): Token {
-  for (let type of tokenTypes) {
+  for (let type of types) {
     if (match(type)) {
       return tokens[currentIndex - 1];
     }

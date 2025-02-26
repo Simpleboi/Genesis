@@ -13,22 +13,22 @@ export interface ProgramNode extends ASTNode {
 // Statements
 export interface VariableDeclarationNode extends ASTNode {
   type: 'VariableDeclaration';
-  identifer: string;
-  varType?: string; // ex. int, string, bool, etc.
-  initializer?: Expression;
+  varType?: string;     // ex. int, string, bool, etc.
+  identifer: string;    // ex. "x", "name"
+  initializer?: ExpressionNode | null; // possibly null if no
 }
 
 // Asignment
 export interface AssignmentStatementNode extends ASTNode {
   type: 'AssignmentStatement';
   identifier: string;
-  value: Expression;
+  value: ExpressionNode;
 }
 
 // If Statement
 export interface IfStatementNode extends ASTNode {
   type: 'IfStatement';
-  condition: Expression;
+  condition: ExpressionNode;
   consequent: ASTNode[]; // Body of the 'if' block
   alternate?: ASTNode[]; // Body of the 'else' block
 }
@@ -39,7 +39,7 @@ contains a conditon and a body of statements
 */ 
 export interface WhileStatementNode extends ASTNode {
   type: 'WhileStatement';
-  condition: Expression;
+  condition: ExpressionNode;
   body: ASTNode[];
 }
 
@@ -50,8 +50,8 @@ contains optional initialization, condition, and updates expressions, plus a bod
 export interface ForStatementNode extends ASTNode {
   type: 'ForStatement';
   initializer?: ASTNode;
-  condition?: Expression;
-  update?: Expression;
+  condition?: ExpressionNode;
+  update?: ExpressionNode;
   body: ASTNode[];
 }
 
@@ -80,7 +80,7 @@ Wraps an "Expression" in a statement context when you want to allow expressions 
 */
 export interface ExpressionStatementNode extends ASTNode {
     type: "ExpressionStatement";
-    expression: Expression;
+    expression: ExpressionNode;
 }
 
 /*
@@ -100,24 +100,24 @@ export interface LiteralNode extends ASTNode {
 export interface BinaryExpressionNode extends ASTNode {
   type: 'BinaryExpression';
   operator: string; // Like "+", "-", "*", "/", "==", etc.
-  left: Expression;
-  right: Expression;
+  left: ExpressionNode;
+  right: ExpressionNode;
 }
 
 export interface UnaryExpressionNode extends ASTNode {
   type: 'UnaryExpression';
   operator: string; // like "-", "!"
-  argument: Expression;
+  argument: ExpressionNode;
 }
 
 export interface CallExpressionNode extends ASTNode {
   type: 'CallExpression';
-  callee: Expression; // an Identifier or another CallExpression
-  arguments: Expression[]; // list of expressions passed as arguments
+  callee: ExpressionNode; // an Identifier or another CallExpression
+  arguments: ExpressionNode[]; // list of expressions passed as arguments
 }
 
 // Expressions
-export type Expression =
+export type ExpressionNode =
   | IdentifierNode
   | LiteralNode
   | BinaryExpressionNode
