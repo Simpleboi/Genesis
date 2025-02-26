@@ -1,0 +1,31 @@
+
+parseExpression() is the top-level function that calls 
+parseTerm() to handle "+" and "-" operators.
+
+For parseTerm(), it parses a factor-level expression (parseFactor()) then while we see "+" or "-", build a BinaryExpressionNode from our AST. 
+
+parseFactor() is a similar loop for "*" and "/"
+
+parseUnary() is meant for if we see a "-" or "!" before an expression, signaling negation. 
+
+
+Here's a Sample Flow for "x + 3 * (y - 1)"
+
+parseExpression() calls parseTerm().
+
+parseTerm() calls parseFactor() to parse the left side:
+* That eventually sees an identifer "x".
+* There is no "*" or "/", so it returns an identiferNode("x").
+
+Back in parseTerm, it sees if match(PLUS) is true. if it is, parse another factor on the right side:
+
+* The right side is 3 * (y - 1).
+so parseFactor() is called, sees a NUMBER(3), then sees match(TIMES), etc.
+
+eventually we build a tree like: 
+
+BinaryExpression(+)
+   left: Identifier("x")
+   right: BinaryExpression(*)
+       left: Literal(3)
+       right: Parenthesized Expression -> parseExpression -> ...

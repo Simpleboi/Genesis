@@ -18,6 +18,7 @@ export enum TokenType {
     LEFTCURLY,         // {
     RIGHTCURLY,        // }
     DIRECTIVE,         // @
+    BANG,              // !
     COMMENT,           // #
     DATA_TYPE,         // int, char, string
     IDENTIFIER,        // some words
