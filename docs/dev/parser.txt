@@ -1,0 +1,17 @@
+
+A parser reads the stream of tokesn from the lexer and matches them against the language's grammar rules (expressions, statements, declarations, etc). Each matched rule produces AST nodes that represent that partiuclar construct in the Genesis language. 
+
+For example: 
+
+VariableDeclaration node for something like int x = 5;
+
+IfStatement node if we see if (...) {...}
+
+and so on. 
+
+The approach here will a Recursive Descent Parser. 
+
+This will include functions like parseStatement(), parseExpression(), etc. 
+
+
+Once we build the AST, we use a transpiler to effectively make pure JS code. 

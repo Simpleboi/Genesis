@@ -5,13 +5,13 @@ export interface ASTNode {
 }
 
 // Program Node
-export interface Program extends ASTNode {
+export interface ProgramNode extends ASTNode {
   type: 'Program';
   body: ASTNode[]; // for statements, func dec, etc
 }
 
 // Statements
-export interface VariableDeclaration extends ASTNode {
+export interface VariableDeclarationNode extends ASTNode {
   type: 'VariableDeclaration';
   identifer: string;
   varType?: string; // ex. int, string, bool, etc.
@@ -19,14 +19,14 @@ export interface VariableDeclaration extends ASTNode {
 }
 
 // Asignment
-export interface AssignmentStatement extends ASTNode {
+export interface AssignmentStatementNode extends ASTNode {
   type: 'AssignmentStatement';
   identifier: string;
   value: Expression;
 }
 
 // If Statement
-export interface IfStatement extends ASTNode {
+export interface IfStatementNode extends ASTNode {
   type: 'IfStatement';
   condition: Expression;
   consequent: ASTNode[]; // Body of the 'if' block
@@ -37,7 +37,7 @@ export interface IfStatement extends ASTNode {
 While Statement.
 contains a conditon and a body of statements
 */ 
-export interface WhileStatement extends ASTNode {
+export interface WhileStatementNode extends ASTNode {
   type: 'WhileStatement';
   condition: Expression;
   body: ASTNode[];
@@ -47,7 +47,7 @@ export interface WhileStatement extends ASTNode {
 For Statement
 contains optional initialization, condition, and updates expressions, plus a body.
 */
-export interface ForStatement extends ASTNode {
+export interface ForStatementNode extends ASTNode {
   type: 'ForStatement';
   initializer?: ASTNode;
   condition?: Expression;
@@ -60,15 +60,15 @@ export interface ForStatement extends ASTNode {
 Function Declaration.
 Contains a function name, optional parameter list, return type, and an array of statements as the body.
 */
-export interface FunctionDeclaration extends ASTNode {
+export interface FunctionDeclarationNode extends ASTNode {
     type: "FunctionDeclaration";
     name: string;
-    params: Parameter[];
+    params: ParameterNode[];
     returnType?: string;
     body: ASTNode[];
 }
 
-export interface Parameter {
+export interface ParameterNode {
     identifier: string;
     paramType?: string;
 }
@@ -78,7 +78,7 @@ export interface Parameter {
 Expression Statement.
 Wraps an "Expression" in a statement context when you want to allow expressions as standalone statements. 
 */
-export interface ExpressionStatement extends ASTNode {
+export interface ExpressionStatementNode extends ASTNode {
     type: "ExpressionStatement";
     expression: Expression;
 }
@@ -87,30 +87,30 @@ export interface ExpressionStatement extends ASTNode {
 Expressions.
 Expressions can be literal values like numbers, strings, identifier, function calls, or binary/unary expressions.
 */
-export interface Identifier extends ASTNode {
+export interface IdentifierNode extends ASTNode {
   type: 'Identifier';
   name: string;
 }
 
-export interface Literal extends ASTNode {
+export interface LiteralNode extends ASTNode {
   type: 'Literal';
   value: string | number | boolean;
 }
 
-export interface BinaryExpression extends ASTNode {
+export interface BinaryExpressionNode extends ASTNode {
   type: 'BinaryExpression';
   operator: string; // Like "+", "-", "*", "/", "==", etc.
   left: Expression;
   right: Expression;
 }
 
-export interface UnaryExpression extends ASTNode {
+export interface UnaryExpressionNode extends ASTNode {
   type: 'UnaryExpression';
   operator: string; // like "-", "!"
   argument: Expression;
 }
 
-export interface CallExpression extends ASTNode {
+export interface CallExpressionNode extends ASTNode {
   type: 'CallExpression';
   callee: Expression; // an Identifier or another CallExpression
   arguments: Expression[]; // list of expressions passed as arguments
@@ -118,8 +118,8 @@ export interface CallExpression extends ASTNode {
 
 // Expressions
 export type Expression =
-  | Identifier
-  | Literal
-  | BinaryExpression
-  | UnaryExpression
-  | CallExpression;
+  | IdentifierNode
+  | LiteralNode
+  | BinaryExpressionNode
+  | UnaryExpressionNode
+  | CallExpressionNode

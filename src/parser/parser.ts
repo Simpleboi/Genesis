@@ -1,19 +1,31 @@
 // Parsing logic to generate AST using Nearley
-import * as nearley from 'nearley';
-import * as grammar from "../grammar/grammar.js";
-
-// function that uses Nearley to parse input
-function Parse(input: string) {
-  const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar));
+import { Token, TokenType } from "../lexer/tokens";
+import { ASTNode, ProgramNode } from "./ast";
 
 
-  // Feed the input to the parser
-  parser.feed(input);
+let tokens: Token[] = [];
+let currentIndex = 0;
 
-  //return the results
-  return parser.results;
+function currentToken(): Token {
+  return tokens[currentIndex];
 }
 
-const input = " 3 + 4";
-const results = Parse(input);
-console.log(results);
+function nextToken(): Token {
+  return tokens[++currentIndex];
+}
+
+function atEnd(): Boolean {
+  return currentIndex >= tokens.length || currentToken().type === TokenType.EOF;
+}
+
+export function parseProgram(incomingTokens: Token[]): ProgramNode {
+  tokens = incomingTokens;
+  currentIndex = 0;
+
+  let body: ASTNode[] = [];
+
+  return {
+    type: "Program",
+    body
+  };
+}

@@ -65,7 +65,7 @@ export function Lexer(input: string): Token[] {
   return _tokens;
 }
 
-let test = 'int num = 10;';
+let test = '10 + 20;';
 let tokens = Lexer(test);
 
 tokens.forEach((element) => {

@@ -22,6 +22,12 @@ export enum TokenType {
     DATA_TYPE,         // int, char, string
     IDENTIFIER,        // some words
     ASSIGNMENT,        // =
+    INT,               // DataType 'int'
+    FLOAT,             // DataType 'float'
+    STRING,            // DataType 'string'
+    BOOL,              // DataType 'bool'
+    CHAR,              // DataType 'char'
+    VOID,              // DataType 'void'
     EOF             
 }
 
