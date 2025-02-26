@@ -1,0 +1,19 @@
+varDec -> (int | float | string) identifer (= Expression)? ";"
+
+We'll use an example flow for: 
+
+int x = 10; 
+
+the tokens fed into the parser look like this:
+[
+    { type: "KEYWORD", value: "int" }, 
+    { type: "IDENTIFIER", value: "x" }
+    { type: "ASSIGNMENT", value: "=" }
+    {type: "NUMBER", value: "10" }
+]
+
+The parser will see the first token, which is the "int" token. 
+
+
+at the end, our parseVarDecl() function will return a VariableDeclarationNode with the data:
+

@@ -19,39 +19,21 @@ export function Lexer(input: string): Token[] {
     // Look at the current character
     let currentChar = peek();
 
-    
     // Skip over whitespace
     skipWhiteSpace();
 
-    // Check for numbers
-    // if (/\d/.test(currentChar)) {
-    //   let number = ''; // Start building the number token.
-
-    //   // Keep adding digits to the number token.
-    //   while (currentIndex < input.length && /\d/.test(input[currentIndex])) {
-    //     number += input[currentIndex];
-    //     currentIndex++;
-    //   }
-
-    //   _tokens.push({ type: TokenType.NUMBER, value: number }); // Add the number token.
-    //   continue;
-    // }
-
     // Read Keywords
     if (readKeywords()) {
-      console.log(`Keyword found and token added`);
       continue;
     }
 
     // Read Symbols
     if (readSymbols()) {
-      console.log(`Symbol found and token added`);
       continue;
     }
 
     // Read Numbers
     if (readNumbers()) {
-      console.log(`Symbol found and token added`);
       continue;
     }
 
@@ -65,7 +47,7 @@ export function Lexer(input: string): Token[] {
   return _tokens;
 }
 
-let test = '10 + 20;';
+let test = 'int x = 10;';
 let tokens = Lexer(test);
 
 tokens.forEach((element) => {

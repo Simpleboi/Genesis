@@ -1,21 +1,63 @@
-// Parsing logic to generate AST using Nearley
-import { Token, TokenType } from "../lexer/tokens";
-import { ASTNode, ProgramNode } from "./ast";
-
+// Parsing logic to generate AST
+import { Token, TokenType } from '../lexer/tokens';
+import { ASTNode, ProgramNode } from './ast';
 
 let tokens: Token[] = [];
 let currentIndex = 0;
 
-function currentToken(): Token {
+export function currentToken(): Token {
   return tokens[currentIndex];
 }
 
-function nextToken(): Token {
+export function nextToken(): Token {
   return tokens[++currentIndex];
 }
 
-function atEnd(): Boolean {
-  return currentIndex >= tokens.length || currentToken().type === TokenType.EOF;
+export function advanceToken(): Token {
+  if (!atEnd()) {
+    currentIndex++;
+  }
+
+  return tokens[currentIndex];
+}
+
+export function atEnd(): Boolean {
+  return currentToken().type === TokenType.EOF;
+}
+
+// To verify incoming tokens with thier types
+export function check(tokenType: TokenType): boolean {
+  if (atEnd()) {
+    return false;
+  }
+  return currentToken().type === tokenType;
+}
+
+export function match(tokenType: TokenType): boolean {
+  if (check(tokenType)) {
+    advanceToken();
+    return true;
+  }
+  return false;
+}
+
+export function consume(tokenType: TokenType, errMessage: string): Token {
+  if (check(tokenType)) {
+    return advanceToken();
+  }
+  throw new Error(errMessage + ' But got ' + currentToken().type);
+}
+
+export function consumeOneOf(
+  tokenTypes: TokenType[],
+  errMessage: string,
+): Token {
+  for (let type of tokenTypes) {
+    if (match(type)) {
+      return tokens[currentIndex - 1];
+    }
+  }
+  throw new Error(errMessage + ' But got ' + currentToken().type);
 }
 
 export function parseProgram(incomingTokens: Token[]): ProgramNode {
@@ -25,7 +67,7 @@ export function parseProgram(incomingTokens: Token[]): ProgramNode {
   let body: ASTNode[] = [];
 
   return {
-    type: "Program",
-    body
+    type: 'Program',
+    body,
   };
 }
