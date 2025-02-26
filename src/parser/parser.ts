@@ -1,5 +1,6 @@
 // Parsing logic to generate AST
 import { Token, TokenType } from '../lexer/tokens';
+import { parseStatement } from './parseHelpers/parseStatement';
 import { ASTNode, ProgramNode } from './ast';
 
 let tokens: Token[] = [];
@@ -66,8 +67,24 @@ export function parseProgram(incomingTokens: Token[]): ProgramNode {
 
   let body: ASTNode[] = [];
 
+  while (!atEnd()) {
+    let stmt = parseStatement();
+    body.push(stmt);
+  }
+
   return {
     type: 'Program',
     body,
   };
 }
+
+const incomingTokens = [
+  { type: TokenType.INT, value: "int" },
+  { type: TokenType.IDENTIFIER, value: "num" },
+  { type: TokenType.ASSIGNMENT, value: "=" },
+  { type: TokenType.NUMBER, value: "10" },
+  { type: TokenType.SEMICOLON, value: ";" },
+  { type: TokenType.EOF, value: "" },
+];
+const ast = parseProgram(tokens);
+console.log(ast);

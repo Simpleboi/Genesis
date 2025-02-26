@@ -101,10 +101,10 @@ function parsePrimary(): ExpressionNode {
     };
   }
 
-  if (match(TokenType.LEFTPAREN)) {
+  if (match(TokenType.LEFT_PAREN)) {
     // '(' Expression ')'
     const expr = parseExpression();
-    consume(TokenType.RIGHTPAREN, "Expect ')' after expression.");
+    consume(TokenType.RIGHT_PAREN, "Expect ')' after expression.");
     return expr;
   }
 

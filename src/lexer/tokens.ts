@@ -37,6 +37,6 @@ export enum TokenType {
 }
 
 export interface Token {
-  value: string;
   type: TokenType;
+  value: string;
 }

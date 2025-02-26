@@ -47,7 +47,7 @@ export function Lexer(input: string): Token[] {
   return _tokens;
 }
 
-let test = 'int bool num for while x = 10;';
+let test = 'int example = 10;';
 let tokens = Lexer(test);
 
 tokens.forEach((element) => {
