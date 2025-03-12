@@ -2,6 +2,9 @@
   "name": "genesis-project",
   "version": "0.9.1",
   "main": "dist/index.js",
+  "bin": {
+    "genesis" : "./dist/cli/cli.ts"
+  },
   "directories": {
     "doc": "docs",
     "test": "tests"
@@ -14,13 +17,14 @@
     "test": "jest",
     "lint": "eslint src/**/*.ts",
     "build": "tsc",
-    "start": "ts-node src/index.ts",
+    "start": "ts-node src/core/core.ts",
     "lint:fix": "eslint --fix src/**/*.ts",
     "watch": "tsc --watch",
     "dev": "ts-node-dev src/index.ts",
     "clean": "rimraf dist",
     "grammar": "npx nearleyc src/grammar/grammar.ne -o src/grammar/grammar.js",
-    "publish": "npm publish --access public"
+    "publish": "npm publish --access public",
+    "gen": "node dist/cli/cli.js build src/examples/index.gen --out src/examples/index.js"
   },
   "keywords": [
     "web-development",
@@ -50,6 +54,7 @@
     "typescript-eslint": "^8.24.1"
   },
   "dependencies": {
+    "commander": "^13.1.0",
     "nearley": "^2.20.1"
   },
   "exports": {

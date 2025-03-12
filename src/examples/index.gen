@@ -1,0 +1,4 @@
+
+int num = 30;
+
+bool example = false;

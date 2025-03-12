@@ -5,7 +5,7 @@ export function genVarDecl(node: VariableDeclarationNode): string {
   // If your language uses `int num = 10;`,
   // we might convert to "let num = 10;" in JS.
   // Or "var", or "const". Up to you.
-  const varName = node.identifer;
+  const varName = node.identifier;
 
   // If there's an initializer, generate that code; else empty
   let initCode = '';
