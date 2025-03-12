@@ -7,7 +7,7 @@ export function parseStatement(): ASTNode {
     let token = currentToken();
 
     // If the token type is a known type token -> parse it
-    if (check(TokenType.INT) || check(TokenType.STRING) || check(TokenType.BOOL)) {
+    if (check(TokenType.DATA_TYPE)) {
         return parseVarDecl();
     }
 

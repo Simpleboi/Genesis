@@ -79,12 +79,13 @@ export function parseProgram(incomingTokens: Token[]): ProgramNode {
 }
 
 const incomingTokens = [
-  { type: TokenType.INT, value: "int" },
+  { type: TokenType.DATA_TYPE, value: "int" },
   { type: TokenType.IDENTIFIER, value: "num" },
   { type: TokenType.ASSIGNMENT, value: "=" },
   { type: TokenType.NUMBER, value: "10" },
   { type: TokenType.SEMICOLON, value: ";" },
   { type: TokenType.EOF, value: "" },
 ];
+
 const ast = parseProgram(incomingTokens);
-console.log(JSON.stringify(ast, null, 2));
+// console.log(JSON.stringify(ast, null, 2));

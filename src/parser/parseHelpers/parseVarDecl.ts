@@ -2,14 +2,12 @@ import { VariableDeclarationNode, ExpressionNode } from '../ast';
 import { match, consume, consumeOneOf, currentToken, check, advanceToken } from '../parser';
 import { TokenType } from '../../lexer/tokens';
 import { parseExpression } from './parseExpression';
-import { advance } from '../../lexer/lexerUtils';
-
 
 export function parseVarDecl(): VariableDeclarationNode {
   // 1. Expect the data type token (int, float, etc)
 
   const typeToken = consumeOneOf(
-    [TokenType.INT, TokenType.FLOAT, TokenType.STRING, TokenType.BOOL],
+    [TokenType.DATA_TYPE],
     'Expected a type keyword (like int, bool) at the start of variable declaration',
   );
   console.log("parseVarDecl -> typeToken:", typeToken.value);

@@ -8,7 +8,7 @@ test("Sample parser test", () => {
 
 test("Parses a simple variable declaration", () => {
     const tokens = [
-      { type: TokenType.INT, value: "int" },
+      { type: TokenType.DATA_TYPE, value: "int" },
       { type: TokenType.IDENTIFIER, value: "num" },
       { type: TokenType.ASSIGNMENT, value: "=" },
       { type: TokenType.NUMBER, value: "10" },

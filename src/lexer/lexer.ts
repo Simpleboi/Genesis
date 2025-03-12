@@ -47,12 +47,4 @@ export function Lexer(input: string): Token[] {
   return _tokens;
 }
 
-let test = 'int example = 10;';
-let tokens = Lexer(test);
 
-tokens.forEach((element) => {
-  console.log({
-    type: TokenType[element.type],
-    value: element.value,
-  });
-});
