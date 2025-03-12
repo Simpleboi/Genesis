@@ -13,8 +13,8 @@ export interface ProgramNode extends ASTNode {
 // Statements
 export interface VariableDeclarationNode extends ASTNode {
   type: 'VariableDeclaration';
-  varType?: string;     // ex. int, string, bool, etc.
-  identifer: string;    // ex. "x", "name"
+  varType?: string; // ex. int, string, bool, etc.
+  identifier: string; // ex. "x", "name"
   initializer?: ExpressionNode | null; // possibly null if no
 }
 
@@ -36,7 +36,7 @@ export interface IfStatementNode extends ASTNode {
 /*
 While Statement.
 contains a conditon and a body of statements
-*/ 
+*/
 export interface WhileStatementNode extends ASTNode {
   type: 'WhileStatement';
   condition: ExpressionNode;
@@ -55,32 +55,30 @@ export interface ForStatementNode extends ASTNode {
   body: ASTNode[];
 }
 
-
 /*
 Function Declaration.
 Contains a function name, optional parameter list, return type, and an array of statements as the body.
 */
 export interface FunctionDeclarationNode extends ASTNode {
-    type: "FunctionDeclaration";
-    name: string;
-    params: ParameterNode[];
-    returnType?: string;
-    body: ASTNode[];
+  type: 'FunctionDeclaration';
+  name: string;
+  params: ParameterNode[];
+  returnType?: string;
+  body: ASTNode[];
 }
 
 export interface ParameterNode {
-    identifier: string;
-    paramType?: string;
+  identifier: string;
+  paramType?: string;
 }
-
 
 /*
 Expression Statement.
 Wraps an "Expression" in a statement context when you want to allow expressions as standalone statements. 
 */
 export interface ExpressionStatementNode extends ASTNode {
-    type: "ExpressionStatement";
-    expression: ExpressionNode;
+  type: 'ExpressionStatement';
+  expression: ExpressionNode;
 }
 
 /*
@@ -122,4 +120,4 @@ export type ExpressionNode =
   | LiteralNode
   | BinaryExpressionNode
   | UnaryExpressionNode
-  | CallExpressionNode
+  | CallExpressionNode;

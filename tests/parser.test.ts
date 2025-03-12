@@ -7,7 +7,7 @@ test("Sample parser test", () => {
 });
 
 test("Parses a simple variable declaration", () => {
-    const tokens = [
+    const IncomingTokens = [
       { type: TokenType.DATA_TYPE, value: "int" },
       { type: TokenType.IDENTIFIER, value: "num" },
       { type: TokenType.ASSIGNMENT, value: "=" },
@@ -16,7 +16,7 @@ test("Parses a simple variable declaration", () => {
       { type: TokenType.EOF, value: "" },
     ];
   
-    const ast = parseProgram(tokens);
+    const ast = parseProgram(IncomingTokens);
     expect(ast).toEqual({
       type: "Program",
       body: [
@@ -26,7 +26,7 @@ test("Parses a simple variable declaration", () => {
           identifier: "num",
           initializer: {
             type: "Literal",
-            value: "10"
+            value: 10
           }
         }
       ]

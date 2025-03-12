@@ -39,7 +39,7 @@ export function parseVarDecl(): VariableDeclarationNode {
   return {
     type: 'VariableDeclaration',
     varType: typeToken.value, // ex. "int"
-    identifer: idToken.value, // ex. "num"
+    identifier: idToken.value, // ex. "num"
     initializer: initializer,
   };
 }
