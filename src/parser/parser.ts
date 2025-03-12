@@ -86,5 +86,5 @@ const incomingTokens = [
   { type: TokenType.SEMICOLON, value: ";" },
   { type: TokenType.EOF, value: "" },
 ];
-const ast = parseProgram(tokens);
-console.log(ast);
+const ast = parseProgram(incomingTokens);
+console.log(JSON.stringify(ast, null, 2));
