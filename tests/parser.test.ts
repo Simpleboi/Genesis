@@ -21,7 +21,7 @@ test("Parses a simple variable declaration", () => {
       type: "Program",
       body: [
         {
-          type: "VarDecl",
+          type: "VariableDeclaration",
           varType: "int",
           identifier: "num",
           initializer: {
