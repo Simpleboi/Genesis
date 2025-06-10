@@ -58,6 +58,10 @@ export function readSymbols(): boolean {
       addToken(TokenType.ASSIGNMENT, currentChar);
       advance();
       return true;
+    case '.':
+      addToken(TokenType.DECIMAL, currentChar);
+      advance();
+      return true;
     case ';':
       addToken(TokenType.SEMICOLON, currentChar);
       advance();

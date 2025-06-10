@@ -1,1 +1,1 @@
-let nameHereNow = 20;
+let nameHereNow = 10;

@@ -89,7 +89,8 @@ function parsePrimary(): ExpressionNode {
     // Example: "42"
     return <LiteralNode>{
       type: "Literal",
-      value: parseFloat(token.value) // or parseInt, depending on your language
+      value: parseFloat(token.value),
+      valueType: token.value.includes(".") ? "float" : "int"
     };
   }
 

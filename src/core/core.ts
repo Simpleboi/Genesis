@@ -3,12 +3,12 @@ import { parseProgram } from "../parser/parser";
 import { generateJS } from "../transpiler/transpiler";
 import { Lexer } from "../lexer/lexer";
 
-// const code = "int num = 10;";
-// console.log("Genesis code:", code);
+const code = "204.";
+console.log("Genesis code:", code);
 
 // 1) Lexer
-// const tokens = Lexer(code);
-// console.log("Tokens:", tokens);
+const tokens = Lexer(code);
+console.log("Tokens:", tokens);
 
 // 2) Parse
 // const ast = parseProgram(tokens);

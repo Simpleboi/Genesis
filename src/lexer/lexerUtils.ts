@@ -11,8 +11,10 @@ export function initializeLexer(newInput: string) {
 }
 
 // Function to peek at the current character without advancing
-export function peek() {
-  return _currentIndex < _input.length ? _input[_currentIndex] : null;
+export function peek(offset: number = 0) {
+  return _currentIndex + offset < _input.length
+    ? _input[_currentIndex + offset]
+    : null;
 }
 
 // Function to Advance the current index to the next character

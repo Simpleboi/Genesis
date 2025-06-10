@@ -93,6 +93,7 @@ export interface IdentifierNode extends ASTNode {
 export interface LiteralNode extends ASTNode {
   type: 'Literal';
   value: string | number | boolean;
+  valueType: string;
 }
 
 export interface BinaryExpressionNode extends ASTNode {
