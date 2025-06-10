@@ -12,5 +12,5 @@ export function parseStatement(): ASTNode {
     }
 
     // Otherwise, placeholder or error
-    throw new Error(`Unknown statement start: ${token.type}`);
+    throw new Error(`Unknown statement start: ${token.type} ${token}`);
 }

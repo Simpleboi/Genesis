@@ -29,7 +29,7 @@ export function addToken(type: TokenType, value: string) {
   _tokens.push({ type, value });
 }
 
-// Function to skipe whitespace characters
+// Function to skip whitespace characters
 export function skipWhiteSpace() {
   while (true) {
     let currentChar = peek();
@@ -39,4 +39,14 @@ export function skipWhiteSpace() {
     }
     advance();
   }
+}
+
+// Function to test if a character is a number
+export function isDigit(char: string): boolean {
+  return /^\d$/.test(char);
+}
+
+// Function to check if the string has a decimal
+export function hasDecimalPoint(str: string): boolean {
+  return str.includes('.');
 }

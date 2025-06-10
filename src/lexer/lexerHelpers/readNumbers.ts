@@ -1,15 +1,6 @@
 import { addToken, advance, peek } from '../lexerUtils';
 import { TokenType } from '../tokens';
-
-// Function to check if the character is a digit
-export function isDigit(char: string): boolean {
-  return /^\d$/.test(char);
-}
-
-// Function to check if the string has a decimal
-export function hasDecimalPoint(str: string): boolean {
-  return str.includes('.');
-}
+import { isDigit } from '../lexerUtils';
 
 // Function to read numbers (tokenize the number portion)
 export function readNumbers(): boolean {

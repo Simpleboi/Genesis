@@ -1,4 +1,6 @@
 
 
-float nameHereNow = 10.2;
+
+float deci = 10.2;
+int stale = 20;
 

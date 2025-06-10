@@ -1,1 +1,2 @@
-let nameHereNow = 10;
+let deci = 10.2;
+let stale = 20;
