@@ -24,7 +24,8 @@
     "clean": "rimraf dist",
     "grammar": "npx nearleyc src/grammar/grammar.ne -o src/grammar/grammar.js",
     "publish": "npm publish --access public",
-    "gen": "node dist/cli/cli.js build src/examples/index.gen --out src/examples/index.js"
+    "gen": "node dist/cli/cli.js build src/examples/index.gen --out src/examples/index.js",
+    "genc" : "node dist/cli/cli.js build src/examples/index.gen --out src/examples/index.js && node ./src/examples/index.js"
   },
   "keywords": [
     "web-development",

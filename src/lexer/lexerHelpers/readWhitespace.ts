@@ -1,4 +1,4 @@
-import { TokenType, Token } from "../tokens";
+import { Token } from "../tokens";
 
 // Function to check if the character is whitespace
 export function isWhiteSpace(char: string): boolean {
