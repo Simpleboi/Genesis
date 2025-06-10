@@ -9,7 +9,7 @@ import { program } from 'commander';
 program
   .name('Genesis')
   .description('A CLI for the Genesis Language')
-  .version('0.9.1');
+  .version('0.9.3');
 
 // "Build" command: transpile .gen code to JS
 program
