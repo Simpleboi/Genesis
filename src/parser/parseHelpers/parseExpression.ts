@@ -57,6 +57,33 @@ function parseFactor(): ExpressionNode {
   return expr;
 }
 
+function determineResultType(
+  left: ExpressionNode,
+  right: ExpressionNode,
+): 'int' | 'float' | 'string' {
+  
+  const getType = (node: ExpressionNode): 'int' | 'float' | 'string' => {
+    
+    if (node.type === 'Literal' && 'valueType' in node) {
+      return node.valueType as "int" | "float" | "string";
+    }
+    if (node.type === 'BinaryExpression') {
+      return node.resultType;
+    }
+    if (node.type === 'Identifier') {
+      return 'string'; // defaulting to string is okay for now
+    }
+    return 'float'; // fallback default
+  };
+
+  const leftType = getType(left);
+  const rightType = getType(right);
+
+  if (leftType === 'string' || rightType === 'string') return 'string';
+  if (leftType === 'float' || rightType === 'float') return 'float';
+  return 'int';
+}
+
 /**
  * parseUnary handles unary operators like ! or -
  * e.g. unary => ( '!' | '-' ) unary | primary
@@ -138,6 +165,7 @@ function parsePrimary(): ExpressionNode {
  * Helper to create a BinaryExpressionNode
  */
 function makeBinary(
+  
   left: ExpressionNode,
   operator: string,
   right: ExpressionNode,
@@ -147,5 +175,6 @@ function makeBinary(
     operator,
     left,
     right,
+    resultType: determineResultType(left, right)
   };
 }

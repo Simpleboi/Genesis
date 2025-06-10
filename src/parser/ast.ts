@@ -101,6 +101,7 @@ export interface BinaryExpressionNode extends ASTNode {
   operator: string; // Like "+", "-", "*", "/", "==", etc.
   left: ExpressionNode;
   right: ExpressionNode;
+  resultType: "int" | "float" | "string";
 }
 
 export interface UnaryExpressionNode extends ASTNode {
