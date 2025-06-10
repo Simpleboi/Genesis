@@ -1,6 +1,6 @@
 {
   "name": "genesis-project",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "main": "dist/index.js",
   "bin": {
     "genesis" : "./dist/cli/cli.ts"
