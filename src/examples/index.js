@@ -1,2 +1,1 @@
-let deci = 10.2;
-let stale = 20;
+let name = "nate";

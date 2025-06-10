@@ -1,6 +1,5 @@
 
 
 
-float deci = 10.2;
-int stale = 20;
+string name = 'nate';
 

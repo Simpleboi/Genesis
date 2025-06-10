@@ -99,6 +99,14 @@ function parsePrimary(): ExpressionNode {
     };
   }
 
+  if (match(TokenType.STRING)) {
+    return {
+      type: 'Literal',
+      value: token.value,
+      valueType: 'string',
+    };
+  }
+
   if (match(TokenType.FLOAT)) {
     // Example: "103.7"
     return <LiteralNode>{
@@ -134,7 +142,6 @@ function makeBinary(
   operator: string,
   right: ExpressionNode,
 ): BinaryExpressionNode {
-
   return {
     type: 'BinaryExpression',
     operator,

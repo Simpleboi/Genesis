@@ -10,7 +10,7 @@ export function parseVarDecl(): VariableDeclarationNode {
     [TokenType.DATA_TYPE],
     'Expected a type keyword (like int, bool) at the start of variable declaration',
   );
-  console.log("parseVarDecl -> typeToken:", typeToken.value);
+  console.log("parseVarDecl -> Token Type:", typeToken.value);
 
 
   // 2. Read the identifer

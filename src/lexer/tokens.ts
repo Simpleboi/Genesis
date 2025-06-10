@@ -28,7 +28,8 @@ export enum TokenType {
   INTEGER = 24,           // 10, 200
   FLOAT = 25,             // 3.14, 10001.2
   DECIMAL = 26,           // .
-  EOF = 26,              // EOF = End Of File
+  STRING = 27,            // "something"
+  EOF = 28,              // EOF = End Of File
 }
 
 export interface Token {

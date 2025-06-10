@@ -3,7 +3,7 @@ import { parseProgram } from "../parser/parser";
 import { generateJS } from "../transpiler/transpiler";
 import { Lexer } from "../lexer/lexer";
 
-const code = "int num = 20.5;";
+const code = "string name = 'nate';";
 console.log("Genesis code:", code);
 
 // 1) Lexer

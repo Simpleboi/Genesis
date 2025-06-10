@@ -10,6 +10,7 @@ import {
 import { readSymbols } from './lexerHelpers/readSymbols';
 import { readNumbers } from './lexerHelpers/readNumbers';
 import { readKeywords } from './lexerHelpers/readKeywords';
+import { readStrings } from './lexerHelpers/readStrings';
 
 export function Lexer(input: string): Token[] {
   // Initialize the lexer
@@ -21,6 +22,11 @@ export function Lexer(input: string): Token[] {
 
     // Skip over whitespace
     skipWhiteSpace();
+
+    // Read Strings
+    if (readStrings()) {
+      continue;
+    }
 
     // Read Keywords
     if (readKeywords()) {
