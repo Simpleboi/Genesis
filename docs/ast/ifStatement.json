@@ -1,0 +1,19 @@
+{
+  "type": "IfStatement",
+  "condition": {
+    "type": "Identifier",
+    "name": "num"
+  },
+  "thenBranch": [
+    {
+      "type": "VariableDeclaration",
+      "varType": "int",
+      "identifier": "day",
+      "initializer": {
+        "type": "Literal",
+        "value": "friday",
+        "valueType": "string"
+      }
+    }
+  ]
+}

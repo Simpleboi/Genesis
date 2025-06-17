@@ -24,15 +24,19 @@ export function readKeywords(): boolean {
     advance();
   }
 
+  // if the word is in the keywords array
   if (KEYWORDS.includes(word)) {
-    addToken(TokenType.KEYWORD, word);
-  } 
-  else if (DATA_TYPE.includes(word)) {
+    switch (word) {
+      case "if":
+        addToken(TokenType.IF, word);
+        break;
+      default:
+        addToken(TokenType.KEYWORD, word);
+    }
+  } else if (DATA_TYPE.includes(word)) {
     addToken(TokenType.DATA_TYPE, word);
-  } 
-  else {
+  } else {
     addToken(TokenType.IDENTIFIER, word);
   }
-
   return true;
 }

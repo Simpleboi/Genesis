@@ -13,8 +13,8 @@ export function parseStatement(): ASTNode {
     }
 
     // If the token is an 'if' keyword
-    if (check(TokenType.KEYWORD)) {
-        match(TokenType.KEYWORD);
+    if (check(TokenType.IF)) {
+        match(TokenType.IF);
         return parseIfStatement();
     }
 
