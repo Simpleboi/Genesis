@@ -10,9 +10,12 @@ export function currentToken(): Token {
   return tokens[currentIndex];
 }
 
-export function nextToken(): Token {
-  return tokens[++currentIndex];
-}
+// export function nextToken(): Token {
+//   if (!atEnd()) {
+//     currentIndex++;
+//   }
+//   return tokens[++currentIndex];
+// }
 
 export function advanceToken(): Token {
   if (!atEnd()) {
@@ -22,7 +25,7 @@ export function advanceToken(): Token {
   return tokens[currentIndex];
 }
 
-export function atEnd(): Boolean {
+export function atEnd(): boolean {
   return currentToken().type === TokenType.EOF;
 }
 

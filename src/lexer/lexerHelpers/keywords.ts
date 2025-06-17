@@ -2,8 +2,6 @@
 export const KEYWORDS: string[] = [
   'for',
   'while',
-  'if',
-  'else',
   'elif',
   'break',
   'continue',
@@ -26,4 +24,6 @@ export const KEYWORDS: string[] = [
   'finally',
   'throw',
   'return',
+  'if',
+  'else'
 ];

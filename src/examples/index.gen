@@ -1,4 +1,8 @@
 
 
 
-int num = 40;
+int num = 10;
+
+if (num == 20) {
+    num = 30;
+}

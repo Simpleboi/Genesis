@@ -29,7 +29,9 @@ export enum TokenType {
   FLOAT = 25,             // 3.14, 10001.2
   DECIMAL = 26,           // .
   STRING = 27,            // "something"
-  EOF = 28,              // EOF = End Of File
+  IF = 28,                // "if" statement
+  ELSE = 29,              // "else" statement
+  EOF = 30,              // EOF = End Of File
 }
 
 export interface Token {

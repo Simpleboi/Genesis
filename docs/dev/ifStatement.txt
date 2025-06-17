@@ -1,0 +1,33 @@
+This is the AST for the If Statement
+
+export interface IfStatementNode extends ASTNode {
+  type: 'IfStatement';
+  condition: ExpressionNode;
+  consequent: ASTNode[]; // Body of the 'if' block
+  alternate?: ASTNode[]; // Body of the 'else' block
+}
+
+This means that:
+
+if (x > 5) {
+    int y = 10;
+} else {
+    print("x is too smalle");
+}
+
+This turns into an AST that looks like: 
+
+{
+    type: "IfStatement",
+    condition: { type: "BinaryExpression", ..},
+    consequent: [ /* VariableDeclarationNode for y */]
+    alternate: [ "PrintStatementNode" ]
+}
+
+---------- Lexer
+
+[
+    {
+        type: 
+    }
+]

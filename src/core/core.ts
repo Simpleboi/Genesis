@@ -3,7 +3,12 @@ import { parseProgram } from "../parser/parser";
 import { generateJS } from "../transpiler/transpiler";
 import { Lexer } from "../lexer/lexer";
 
-const code = "string name = 'nate' + 'great';";
+const code = `
+int num = 10;
+if (num) {
+int day = "friday";
+}
+`;
 console.log("Genesis code:", code);
 
 // 1) Lexer
@@ -15,5 +20,5 @@ const ast = parseProgram(tokens);
 console.log("AST:", JSON.stringify(ast, null, 2));
 
 // 3) Generate JS
-const jsCode = generateJS(ast);
-console.log("Generated JS:", jsCode);
+// const jsCode = generateJS(ast);
+// console.log("Generated JS:", jsCode);

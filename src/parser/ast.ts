@@ -29,8 +29,8 @@ export interface AssignmentStatementNode extends ASTNode {
 export interface IfStatementNode extends ASTNode {
   type: 'IfStatement';
   condition: ExpressionNode;
-  consequent: ASTNode[]; // Body of the 'if' block
-  alternate?: ASTNode[]; // Body of the 'else' block
+  thenBranch: ASTNode[]; // Body of the 'if' block
+  elseBranch?: ASTNode[]; // Body of the 'else' block
 }
 
 /*
