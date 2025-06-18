@@ -7,6 +7,7 @@ import {
   LiteralNode,
   IdentifierNode,
   BinaryExpressionNode,
+  AssignmentStatementNode,
 } from '../parser/ast';
 
 import { genProgram } from '../gen/genProgram';
@@ -14,6 +15,7 @@ import { genIdentifier } from '../gen/genIdentifier';
 import { genBinaryExpression } from '../gen/genBinaryExpressions';
 import { genVarDecl } from '../gen/genVarDecl';
 import { genLiteral } from '../gen/genLiteral';
+import { genAssignmentExpression } from '../gen/genAssignment';
 
 /**
  * The main entry point for code generation.
@@ -33,6 +35,8 @@ export function generateJS(node: ASTNode): string {
       return genIdentifier(node as IdentifierNode);
     case 'BinaryExpression':
       return genBinaryExpression(node as BinaryExpressionNode);
+    case 'AssignmentStatement':
+      return genAssignmentExpression(node as AssignmentStatementNode);
     default:
       throw new Error(`Unknown node type: ${node.type}`);
   }

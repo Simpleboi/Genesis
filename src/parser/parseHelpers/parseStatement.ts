@@ -3,6 +3,7 @@ import { ASTNode } from "../ast";
 import { check, currentToken, match } from "../parser";
 import { parseVarDecl } from "./parseVarDecl";
 import { parseIfStatement } from "./parseIfStatement";
+import { parseAssignment } from "./parseAssignment";
 
 export function parseStatement(): ASTNode {
     let token = currentToken();
@@ -17,6 +18,12 @@ export function parseStatement(): ASTNode {
         match(TokenType.IF);
         return parseIfStatement();
     }
+
+    // If the token is an identifer
+    if (check(TokenType.IDENTIFIER)) {
+        return parseAssignment();
+    }
+
 
     // Otherwise, placeholder or error
     console.log(`Statement token that failed to match: ${token}`);

@@ -30,7 +30,6 @@ export function readNumbers(): boolean {
     } else {
       addToken(TokenType.INTEGER, number);
     }
-    console.log(number);
     return true;
   }
   return false;

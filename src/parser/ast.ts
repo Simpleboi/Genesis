@@ -21,7 +21,7 @@ export interface VariableDeclarationNode extends ASTNode {
 // Asignment
 export interface AssignmentStatementNode extends ASTNode {
   type: 'AssignmentStatement';
-  identifier: string;
+  identifier: IdentifierNode;
   value: ExpressionNode;
 }
 
@@ -122,4 +122,5 @@ export type ExpressionNode =
   | LiteralNode
   | BinaryExpressionNode
   | UnaryExpressionNode
-  | CallExpressionNode;
+  | CallExpressionNode
+  | AssignmentStatementNode;

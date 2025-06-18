@@ -46,16 +46,17 @@ export function match(tokenType: TokenType): boolean {
 }
 
 export function consume(tokenType: TokenType, errMessage: string): Token {
-  if (check(tokenType)) {
-    return advanceToken();
+  const token = currentToken();
+
+  if (token.type === tokenType) {
+    advanceToken();
+    return token;
   }
+
   throw new Error(errMessage + ' But got ' + currentToken().type);
 }
 
-export function consumeOneOf(
-  types: TokenType[],
-  errMessage: string,
-): Token {
+export function consumeOneOf(types: TokenType[], errMessage: string): Token {
   for (let type of types) {
     if (match(type)) {
       return tokens[currentIndex - 1];

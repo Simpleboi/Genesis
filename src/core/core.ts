@@ -4,10 +4,8 @@ import { generateJS } from "../transpiler/transpiler";
 import { Lexer } from "../lexer/lexer";
 
 const code = `
-int num = 10;
-if (num) {
-int day = "friday";
-}
+int x = 5;
+x = 10;
 `;
 console.log("Genesis code:", code);
 
@@ -20,5 +18,5 @@ const ast = parseProgram(tokens);
 console.log("AST:", JSON.stringify(ast, null, 2));
 
 // 3) Generate JS
-// const jsCode = generateJS(ast);
-// console.log("Generated JS:", jsCode);
+const jsCode = generateJS(ast);
+console.log("Generated JS:", jsCode);

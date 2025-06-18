@@ -21,12 +21,12 @@ test('Lexer correctly tokenizes numbers', () => {
   const tokens = Lexer(input);
 
   expect(tokens).toEqual([
-    { type: TokenType.NUMBER, value: '123' },
-    { type: TokenType.NUMBER, value: '456' },
-    { type: TokenType.NUMBER, value: '1' },
-    { type: TokenType.NUMBER, value: '280' },
-    { type: TokenType.NUMBER, value: '1000' },
-    { type: TokenType.NUMBER, value: '7' },
+    { type: TokenType.INTEGER, value: '123' },
+    { type: TokenType.INTEGER, value: '456' },
+    { type: TokenType.INTEGER, value: '1' },
+    { type: TokenType.INTEGER, value: '280' },
+    { type: TokenType.INTEGER, value: '1000' },
+    { type: TokenType.INTEGER, value: '7' },
     { type: TokenType.EOF, value: '' }
   ]);
 });
@@ -73,7 +73,7 @@ test('Lexer correctly tokenizes an entire expression', () => {
     { type: TokenType.DATA_TYPE, value: 'int' },
     { type: TokenType.IDENTIFIER, value: 'num' },
     { type: TokenType.ASSIGNMENT, value: '=' },
-    { type: TokenType.NUMBER, value: '10' },
+    { type: TokenType.INTEGER, value: '10' },
     { type: TokenType.SEMICOLON, value: ';' },
     { type: TokenType.EOF, value: '' }
   ]);
