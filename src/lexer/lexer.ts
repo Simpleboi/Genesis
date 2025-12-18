@@ -35,7 +35,7 @@ export class LexerClass {
 
   skipWhiteSpace(): void {
     while (true) {
-      let currentChar = this.peek();
+      const currentChar = this.peek();
 
       if (currentChar === null || !/\s/.test(currentChar)) {
         break;
@@ -52,7 +52,7 @@ export class LexerClass {
   tokenize(): Token[] {
     while (this.currentIndex < this.input.length) {
       // Look at the current character
-      let currentChar = this.peek();
+      const currentChar = this.peek();
 
       // Skip over whitespace
       this.skipWhiteSpace();

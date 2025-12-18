@@ -1,4 +1,4 @@
-import { match, consume, currentToken } from '../parser';
+import { ParserClass } from '../parser';
 import {
   ExpressionNode,
   BinaryExpressionNode,
@@ -10,24 +10,25 @@ import { TokenType } from '../../lexer/tokens';
 /**
  * The top-level expression parser, e.g. for "x + 3" or "4 * (y - 2)"
  * We'll parse from highest precedence (Term) to handle + and - at this level.
+ * Takes a ParserClass instance and operates on its state
  */
-export function parseExpression(): ExpressionNode {
-  return parseTerm();
+export function parseExpression(parser: ParserClass): ExpressionNode {
+  return parseTerm(parser);
 }
 
 /**
  * parseTerm handles + and -
  * e.g. expression => term ( ( '+' | '-' ) term )*
  */
-function parseTerm(): ExpressionNode {
-  let expr = parseFactor(); // parse lower-precedence (factor) first
+function parseTerm(parser: ParserClass): ExpressionNode {
+  let expr = parseFactor(parser); // parse lower-precedence (factor) first
 
   while (true) {
-    if (match(TokenType.PLUS)) {
-      const right = parseFactor();
+    if (parser.match(TokenType.PLUS)) {
+      const right = parseFactor(parser);
       expr = makeBinary(expr, '+', right);
-    } else if (match(TokenType.MINUS)) {
-      const right = parseFactor();
+    } else if (parser.match(TokenType.MINUS)) {
+      const right = parseFactor(parser);
       expr = makeBinary(expr, '-', right);
     } else {
       break;
@@ -40,15 +41,15 @@ function parseTerm(): ExpressionNode {
  * parseFactor handles * and /
  * e.g. factor => unary ( ( '*' | '/' ) unary )*
  */
-function parseFactor(): ExpressionNode {
-  let expr = parseUnary();
+function parseFactor(parser: ParserClass): ExpressionNode {
+  let expr = parseUnary(parser);
 
   while (true) {
-    if (match(TokenType.TIMES)) {
-      const right = parseUnary();
+    if (parser.match(TokenType.TIMES)) {
+      const right = parseUnary(parser);
       expr = makeBinary(expr, '*', right);
-    } else if (match(TokenType.DIVIDE)) {
-      const right = parseUnary();
+    } else if (parser.match(TokenType.DIVIDE)) {
+      const right = parseUnary(parser);
       expr = makeBinary(expr, '/', right);
     } else {
       break;
@@ -90,18 +91,18 @@ function determineResultType(
  * parseUnary handles unary operators like ! or -
  * e.g. unary => ( '!' | '-' ) unary | primary
  */
-function parseUnary(): ExpressionNode {
-  if (match(TokenType.BANG)) {
+function parseUnary(parser: ParserClass): ExpressionNode {
+  if (parser.match(TokenType.BANG)) {
     // e.g. !someExpr
-    const operand = parseUnary();
+    const operand = parseUnary(parser);
     return {
       type: 'UnaryExpression',
       operator: '!',
       argument: operand,
     };
-  } else if (match(TokenType.MINUS)) {
+  } else if (parser.match(TokenType.MINUS)) {
     // e.g. -someExpr
-    const operand = parseUnary();
+    const operand = parseUnary(parser);
     return {
       type: 'UnaryExpression',
       operator: '-',
@@ -110,16 +111,16 @@ function parseUnary(): ExpressionNode {
   }
 
   // Otherwise, fall back to parsePrimary
-  return parsePrimary();
+  return parsePrimary(parser);
 }
 
 /**
  * parsePrimary handles literals, identifiers, and parentheses
  */
-function parsePrimary(): ExpressionNode {
-  const token = currentToken();
+function parsePrimary(parser: ParserClass): ExpressionNode {
+  const token = parser.currentToken();
 
-  if (match(TokenType.INTEGER)) {
+  if (parser.match(TokenType.INTEGER)) {
     // Example: "42"
     return <LiteralNode>{
       type: 'Literal',
@@ -128,7 +129,7 @@ function parsePrimary(): ExpressionNode {
     };
   }
 
-  if (match(TokenType.STRING)) {
+  if (parser.match(TokenType.STRING)) {
     return {
       type: 'Literal',
       value: token.value,
@@ -136,7 +137,7 @@ function parsePrimary(): ExpressionNode {
     };
   }
 
-  if (match(TokenType.FLOAT)) {
+  if (parser.match(TokenType.FLOAT)) {
     // Example: "103.7"
     return <LiteralNode>{
       type: 'Literal',
@@ -145,7 +146,7 @@ function parsePrimary(): ExpressionNode {
     };
   }
 
-  if (match(TokenType.IDENTIFIER)) {
+  if (parser.match(TokenType.IDENTIFIER)) {
     // Example: "x" or "myVar"
     return <IdentifierNode>{
       type: 'Identifier',
@@ -153,10 +154,10 @@ function parsePrimary(): ExpressionNode {
     };
   }
 
-  if (match(TokenType.LEFT_PAREN)) {
+  if (parser.match(TokenType.LEFT_PAREN)) {
     // '(' Expression ')'
-    const expr = parseExpression();
-    consume(TokenType.RIGHT_PAREN, "Expect ')' after expression.");
+    const expr = parseExpression(parser);
+    parser.consume(TokenType.RIGHT_PAREN, "Expect ')' after expression.");
     return expr;
   }
 

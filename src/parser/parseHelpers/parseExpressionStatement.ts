@@ -1,11 +1,15 @@
 import { parseExpression } from "./parseExpression";
 import { ExpressionStatementNode } from "../ast";
 import { TokenType } from "../../lexer/tokens";
-import { consume } from "../parser";
+import { ParserClass } from "../parser";
 
-export function parseExpressionStatement(): ExpressionStatementNode {
-    let exprStatement = parseExpression();
-    consume(TokenType.SEMICOLON, "Expect ';' after expression.");
+/**
+ * Parse expression statements
+ * Takes a ParserClass instance and operates on its state
+ */
+export function parseExpressionStatement(parser: ParserClass): ExpressionStatementNode {
+    let exprStatement = parseExpression(parser);
+    parser.consume(TokenType.SEMICOLON, "Expect ';' after expression.");
     return {
         type: "ExpressionStatement",
         expression: exprStatement

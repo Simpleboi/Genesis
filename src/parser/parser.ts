@@ -1,9 +1,11 @@
 // Parsing logic to generate AST
 import { Token, TokenType } from '../lexer/tokens';
 import { ASTNode, ProgramNode } from './ast';
+import { parseVarDecl } from './parseHelpers/parseVarDecl';
+import { parseIfStatement } from './parseHelpers/parseIfStatement';
+import { parseAssignment } from './parseHelpers/parseAssignment';
 
-
-// ParserClass: A class-based parser that maintains its own state. This prevents issues with concurrent parsing and test side effects.
+// ParserClass: A class-based parser that maintains its own state.
 export class ParserClass {
   private tokens: Token[];
   private currentIndex: number;
@@ -57,7 +59,7 @@ export class ParserClass {
   }
 
   consumeOneOf(types: TokenType[], errMessage: string): Token {
-    for (let type of types) {
+    for (const type of types) {
       if (this.match(type)) {
         return this.tokens[this.currentIndex - 1];
       }
@@ -67,10 +69,10 @@ export class ParserClass {
 
   // This is the main parsing method
   parse(): ProgramNode {
-    let body: ASTNode[] = [];
+    const body: ASTNode[] = [];
 
     while (!this.atEnd()) {
-      let stmt = this.parseStatement();
+      const stmt = this.parseStatement();
       body.push(stmt);
     }
 
@@ -82,7 +84,7 @@ export class ParserClass {
 
   // Import parse helper methods directly into the class
   private parseStatement(): ASTNode {
-    let token = this.currentToken();
+    const token = this.currentToken();
 
     // If the token is a known Data Type -> parse it
     if (this.check(TokenType.DATA_TYPE)) {
@@ -106,21 +108,15 @@ export class ParserClass {
   }
 
   private parseVarDecl() {
-    // Import from parseHelpers/parseVarDecl.ts logic
-    const { parseVarDecl } = require('./parseHelpers/parseVarDecl');
-    return parseVarDecl.call(this);
+    return parseVarDecl(this);
   }
 
   private parseIfStatement() {
-    // Import from parseHelpers/parseIfStatement.ts logic
-    const { parseIfStatement } = require('./parseHelpers/parseIfStatement');
-    return parseIfStatement.call(this);
+    return parseIfStatement(this);
   }
 
   private parseAssignment() {
-    // Import from parseHelpers/parseAssignment.ts logic
-    const { parseAssignment } = require('./parseHelpers/parseAssignment');
-    return parseAssignment.call(this);
+    return parseAssignment(this);
   }
 }
 

@@ -5,7 +5,7 @@ import { LexerClass } from '../lexer';
 // Takes a LexerClass instance and operates on its state
 
 export function readNumbers(lexer: LexerClass): boolean {
-  let currentChar = lexer.peek();
+  const currentChar = lexer.peek();
 
   if (!currentChar || !lexer.isDigit(currentChar)) {
     return false;

@@ -5,7 +5,7 @@ import { LexerClass } from '../lexer';
 // Takes a LexerClass instance and operates on its state
 
 export function readSymbols(lexer: LexerClass): boolean {
-  let currentChar = lexer.peek();
+  const currentChar = lexer.peek();
 
   switch (currentChar) {
     case '+':
