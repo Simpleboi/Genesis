@@ -19,7 +19,7 @@
 
 # Jest or Mocha test coverage
 /coverage/
-
+\
 # npm package lock
 package-lock.json
 yarn.lock
@@ -28,4 +28,4 @@ yarn.lock
 *.tsbuildinfo
 
 # Claude
-.CLAUDE.md
+CLAUDE.md
