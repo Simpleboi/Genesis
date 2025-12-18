@@ -1,36 +1,38 @@
-import { addToken, advance, peek } from '../lexerUtils';
 import { TokenType } from '../tokens';
-import { isDigit } from '../lexerUtils';
+import { LexerClass } from '../lexer';
 
-// Function to read numbers (tokenize the number portion)
-export function readNumbers(): boolean {
-  let currentChar = peek();
+// Read numbers (integers and floats)
+// Takes a LexerClass instance and operates on its state
 
-  if (isDigit(currentChar!)) {
-    // to build the number token
-    let number = '';
+export function readNumbers(lexer: LexerClass): boolean {
+  let currentChar = lexer.peek();
 
-    // Keep adding digits
-    while (isDigit(peek()!)) {
-      number += peek();
-      advance();
-    }
-
-    // Check if there is a number after the decimal
-    if (peek() === '.' && isDigit(peek(1)!)) {
-      number += '.';
-      advance();
-
-      while (isDigit(peek()!)) {
-        number += peek();
-        advance();
-      }
-
-      addToken(TokenType.FLOAT, number);
-    } else {
-      addToken(TokenType.INTEGER, number);
-    }
-    return true;
+  if (!currentChar || !lexer.isDigit(currentChar)) {
+    return false;
   }
-  return false;
+
+  // to build the number token
+  let number = '';
+
+  // Keep adding digits
+  while (lexer.peek() && lexer.isDigit(lexer.peek()!)) {
+    number += lexer.peek();
+    lexer.advance();
+  }
+
+  // Check if there is a number after the decimal
+  if (lexer.peek() === '.' && lexer.peek(1) && lexer.isDigit(lexer.peek(1)!)) {
+    number += '.';
+    lexer.advance();
+
+    while (lexer.peek() && lexer.isDigit(lexer.peek()!)) {
+      number += lexer.peek();
+      lexer.advance();
+    }
+
+    lexer.addToken(TokenType.FLOAT, number);
+  } else {
+    lexer.addToken(TokenType.INTEGER, number);
+  }
+  return true;
 }
