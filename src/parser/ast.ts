@@ -7,7 +7,7 @@ export interface ASTNode {
 // Program Node
 export interface ProgramNode extends ASTNode {
   type: 'Program';
-  body: ASTNode[]; // for statements, func dec, etc
+  body: ASTNode[]; // for statements, function dec, etc
 }
 
 // Statements
@@ -101,7 +101,7 @@ export interface BinaryExpressionNode extends ASTNode {
   operator: string; // Like "+", "-", "*", "/", "==", etc.
   left: ExpressionNode;
   right: ExpressionNode;
-  resultType: "int" | "float" | "string";
+  resultType: "int" | "float" | "string" | "bool" | "double";
 }
 
 export interface UnaryExpressionNode extends ASTNode {

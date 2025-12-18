@@ -60,12 +60,12 @@ function parseFactor(): ExpressionNode {
 function determineResultType(
   left: ExpressionNode,
   right: ExpressionNode,
-): 'int' | 'float' | 'string' {
-  
-  const getType = (node: ExpressionNode): 'int' | 'float' | 'string' => {
-    
+): 'int' | 'float' | 'string' | 'bool' | 'double' {
+
+  const getType = (node: ExpressionNode): 'int' | 'float' | 'string' | 'bool' | 'double' => {
+
     if (node.type === 'Literal' && 'valueType' in node) {
-      return node.valueType as "int" | "float" | "string";
+      return node.valueType as 'int' | 'float' | 'string' | 'bool' | 'double';
     }
     if (node.type === 'BinaryExpression') {
       return node.resultType;
@@ -80,7 +80,9 @@ function determineResultType(
   const rightType = getType(right);
 
   if (leftType === 'string' || rightType === 'string') return 'string';
+  if (leftType === 'double' || rightType === 'double') return 'double';
   if (leftType === 'float' || rightType === 'float') return 'float';
+  if (leftType === 'bool' || rightType === 'bool') return 'bool';
   return 'int';
 }
 

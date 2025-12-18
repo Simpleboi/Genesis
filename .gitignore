@@ -26,3 +26,6 @@ yarn.lock
 
 # Build artifacts
 *.tsbuildinfo
+
+# Claude
+.CLAUDE.md

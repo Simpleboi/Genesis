@@ -1,0 +1,24 @@
+
+Let's say our input is:
+
+int num = 10;
+num = 30;
+
+This is passed as a string into the lexer, which returns an array of Tokens[] 
+
+Tokens: [
+    { type: 21, value: 'int'},
+    { type: 22, value: 'num'},
+    { type: 23, value: '='},
+    { type: 24, value: 10},
+    { type: 5, value: ';'},
+    { type: 22, value: 'num'},
+    { type: 23, value: '='},
+    { type: 24, value: 30},
+    { type: 5, value: ';'},
+    { type: 30, value: ''},
+]
+
+Once we have our array of Token objects. We pass this to the parser, which is parseProgram(). parseProgram() takes in our array of Token objects and returns a ProgramNode. 
+
+The code 'let stmn = parseStatement()' really is our bread and butter. 

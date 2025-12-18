@@ -4,8 +4,8 @@ import { generateJS } from "../transpiler/transpiler";
 import { Lexer } from "../lexer/lexer";
 
 const code = `
-int x = 5;
-x = 10;
+int num = 10;
+num = 30;
 `;
 console.log("Genesis code:", code);
 
