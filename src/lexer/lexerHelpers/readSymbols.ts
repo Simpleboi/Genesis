@@ -1,70 +1,72 @@
-import { peek, addToken, advance } from '../lexerUtils';
 import { TokenType } from '../tokens';
+import { LexerClass } from '../lexer';
 
-// Function to read symbols (operators, paren, etc)
-export function readSymbols(): boolean {
-  let currentChar = peek();
+// Read symbols (operators, parentheses, etc.)
+// Takes a LexerClass instance and operates on its state
+
+export function readSymbols(lexer: LexerClass): boolean {
+  let currentChar = lexer.peek();
 
   switch (currentChar) {
     case '+':
-      addToken(TokenType.PLUS, currentChar);
-      advance();
+      lexer.addToken(TokenType.PLUS, currentChar);
+      lexer.advance();
       return true;
     case '-':
-      addToken(TokenType.MINUS, currentChar);
-      advance();
+      lexer.addToken(TokenType.MINUS, currentChar);
+      lexer.advance();
       return true;
     case '*':
-      addToken(TokenType.TIMES, currentChar);
-      advance();
+      lexer.addToken(TokenType.TIMES, currentChar);
+      lexer.advance();
       return true;
     case '/':
-      addToken(TokenType.DIVIDE, currentChar);
-      advance();
+      lexer.addToken(TokenType.DIVIDE, currentChar);
+      lexer.advance();
       return true;
     case '(':
-      addToken(TokenType.LEFT_PAREN, currentChar);
-      advance();
+      lexer.addToken(TokenType.LEFT_PAREN, currentChar);
+      lexer.advance();
       return true;
     case ')':
-      addToken(TokenType.RIGHT_PAREN, currentChar);
-      advance();
+      lexer.addToken(TokenType.RIGHT_PAREN, currentChar);
+      lexer.advance();
       return true;
     case '[':
-      addToken(TokenType.LEFT_BRACKET, currentChar);
-      advance();
+      lexer.addToken(TokenType.LEFT_BRACKET, currentChar);
+      lexer.advance();
       return true;
     case ']':
-      addToken(TokenType.RIGHT_BRACKET, currentChar);
-      advance();
+      lexer.addToken(TokenType.RIGHT_BRACKET, currentChar);
+      lexer.advance();
       return true;
     case '{':
-      addToken(TokenType.LEFT_CURLY, currentChar);
-      advance();
+      lexer.addToken(TokenType.LEFT_CURLY, currentChar);
+      lexer.advance();
       return true;
     case '}':
-      addToken(TokenType.RIGHT_CURLY, currentChar);
-      advance();
+      lexer.addToken(TokenType.RIGHT_CURLY, currentChar);
+      lexer.advance();
       return true;
     case '#':
-      addToken(TokenType.COMMENT, currentChar);
-      advance();
+      lexer.addToken(TokenType.COMMENT, currentChar);
+      lexer.advance();
       return true;
     case '@':
-      addToken(TokenType.DIRECTIVE, currentChar);
-      advance();
+      lexer.addToken(TokenType.DIRECTIVE, currentChar);
+      lexer.advance();
       return true;
     case '=':
-      addToken(TokenType.ASSIGNMENT, currentChar);
-      advance();
+      lexer.addToken(TokenType.ASSIGNMENT, currentChar);
+      lexer.advance();
       return true;
     case '.':
-      addToken(TokenType.DECIMAL, currentChar);
-      advance();
+      lexer.addToken(TokenType.DECIMAL, currentChar);
+      lexer.advance();
       return true;
     case ';':
-      addToken(TokenType.SEMICOLON, currentChar);
-      advance();
+      lexer.addToken(TokenType.SEMICOLON, currentChar);
+      lexer.advance();
       return true;
     default:
       return false;

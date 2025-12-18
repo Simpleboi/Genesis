@@ -1,9 +1,6 @@
 import { TokenType, Token } from './tokens';
 
-/**
- * LexerClass: A class-based lexer that maintains its own state.
- * This prevents issues with concurrent parsing and test side effects.
- */
+// LexerClass: A class-based lexer that maintains its own state.
 export class LexerClass {
   private input: string;
   private currentIndex: number;

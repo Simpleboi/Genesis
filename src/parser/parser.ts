@@ -2,10 +2,8 @@
 import { Token, TokenType } from '../lexer/tokens';
 import { ASTNode, ProgramNode } from './ast';
 
-/**
- * ParserClass: A class-based parser that maintains its own state.
- * This prevents issues with concurrent parsing and test side effects.
- */
+
+// ParserClass: A class-based parser that maintains its own state. This prevents issues with concurrent parsing and test side effects.
 export class ParserClass {
   private tokens: Token[];
   private currentIndex: number;
