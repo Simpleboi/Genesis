@@ -67,6 +67,14 @@ export class ParserClass {
     throw new Error(errMessage + ' But got ' + this.currentToken().type);
   }
 
+  getCurrentIndex(): number {
+    return this.currentIndex;
+  }
+
+  resetToIndex(index: number): void {
+    this.currentIndex = index;
+  }
+
   // This is the main parsing method
   parse(): ProgramNode {
     const body: ASTNode[] = [];
