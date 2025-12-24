@@ -31,7 +31,9 @@ export enum TokenType {
   STRING = 27,            // "something"
   IF = 28,                // "if" statement
   ELSE = 29,              // "else" statement
-  EOF = 30,              // EOF = End Of File
+  EOF = 30,               // EOF = End Of File
+  RETURN = 31,            // "return" keyword
+  COMMA = 32,             // , for parameter lists
 }
 
 export interface Token {
