@@ -4,6 +4,7 @@ import {
   BinaryExpressionNode,
   LiteralNode,
   IdentifierNode,
+  CallExpressionNode,
 } from '../ast';
 import { TokenType } from '../../lexer/tokens';
 
@@ -147,10 +148,32 @@ function parsePrimary(parser: ParserClass): ExpressionNode {
   }
 
   if (parser.match(TokenType.IDENTIFIER)) {
-    // Example: "x" or "myVar"
+    const name = token.value;
+
+    // Check for function call: identifier followed by '('
+    if (parser.check(TokenType.LEFT_PAREN)) {
+      parser.consume(TokenType.LEFT_PAREN, "Expected '('");
+
+      const args: ExpressionNode[] = [];
+      if (!parser.check(TokenType.RIGHT_PAREN)) {
+        do {
+          args.push(parseExpression(parser));
+        } while (parser.match(TokenType.COMMA));
+      }
+
+      parser.consume(TokenType.RIGHT_PAREN, "Expected ')'");
+
+      return <CallExpressionNode>{
+        type: 'CallExpression',
+        callee: { type: 'Identifier', name },
+        arguments: args,
+      };
+    }
+
+    // Just a variable reference
     return <IdentifierNode>{
       type: 'Identifier',
-      name: token.value,
+      name,
     };
   }
 
