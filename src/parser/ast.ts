@@ -56,6 +56,15 @@ export interface ForStatementNode extends ASTNode {
 }
 
 /*
+Return Statement.
+Contains an optional expression to return.
+*/
+export interface ReturnStatementNode extends ASTNode {
+  type: 'ReturnStatement';
+  value?: ExpressionNode; // Optional for void returns
+}
+
+/*
 Function Declaration.
 Contains a function name, optional parameter list, return type, and an array of statements as the body.
 */
