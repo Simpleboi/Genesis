@@ -4,6 +4,7 @@ import { ASTNode, ProgramNode } from './ast';
 import { parseVarDecl } from './parseHelpers/parseVarDecl';
 import { parseIfStatement } from './parseHelpers/parseIfStatement';
 import { parseAssignment } from './parseHelpers/parseAssignment';
+import { parseStatement } from './parseHelpers/parseStatement';
 
 // ParserClass: A class-based parser that maintains its own state.
 export class ParserClass {
@@ -92,27 +93,7 @@ export class ParserClass {
 
   // Import parse helper methods directly into the class
   private parseStatement(): ASTNode {
-    const token = this.currentToken();
-
-    // If the token is a known Data Type -> parse it
-    if (this.check(TokenType.DATA_TYPE)) {
-      return this.parseVarDecl();
-    }
-
-    // If the token is an 'if' keyword
-    if (this.check(TokenType.IF)) {
-      this.match(TokenType.IF);
-      return this.parseIfStatement();
-    }
-
-    // If the token is an identifier
-    if (this.check(TokenType.IDENTIFIER)) {
-      return this.parseAssignment();
-    }
-
-    // Otherwise, placeholder or error
-    console.log(`Statement token that failed to match: ${token}`);
-    throw new Error(`Unknown statement start: ${token.type} ${token}`);
+    return parseStatement(this);
   }
 
   private parseVarDecl() {

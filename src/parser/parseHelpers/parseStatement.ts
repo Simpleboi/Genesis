@@ -1,11 +1,12 @@
 import { TokenType } from "../../lexer/tokens";
-import { ASTNode } from "../ast";
+import { ASTNode, ExpressionStatementNode } from "../ast";
 import { ParserClass } from "../parser";
 import { parseVarDecl } from "./parseVarDecl";
 import { parseIfStatement } from "./parseIfStatement";
 import { parseAssignment } from "./parseAssignment";
 import { parseReturnStatement } from "./parseReturnStatement";
 import { parseFunctionDeclaration } from "./parseFunctionDeclaration";
+import { parseExpression } from "./parseExpression";
 
 /**
  * Parse statements
@@ -50,8 +51,26 @@ export function parseStatement(parser: ParserClass): ASTNode {
         return parseReturnStatement(parser);
     }
 
-    // If the token is an identifier
+    // If the token is an identifier - could be assignment or function call
     if (parser.check(TokenType.IDENTIFIER)) {
+        // Save position for potential backtrack
+        const savedIndex = parser.getCurrentIndex();
+        parser.advanceToken(); // Move past IDENTIFIER
+
+        // Check if followed by '(' = function call (expression statement)
+        if (parser.check(TokenType.LEFT_PAREN)) {
+            // It's a function call - reset and parse as expression statement
+            parser.resetToIndex(savedIndex);
+            const expr = parseExpression(parser);
+            parser.consume(TokenType.SEMICOLON, "Expected ';' after expression");
+            return <ExpressionStatementNode>{
+                type: 'ExpressionStatement',
+                expression: expr,
+            };
+        }
+
+        // Not a function call, reset and parse as assignment
+        parser.resetToIndex(savedIndex);
         return parseAssignment(parser);
     }
 

@@ -2,7 +2,7 @@ import { TokenType } from '../tokens';
 import { LexerClass } from '../lexer';
 
 const KEYWORDS = ['for', 'while', 'return', 'else'];
-const DATA_TYPES = ['int', 'float', 'string', 'char', 'bool', 'double'];
+const DATA_TYPES = ['int', 'float', 'string', 'char', 'bool', 'double', 'void'];
 
 // Read keywords, data types, and identifiers.
 export function readKeywords(lexer: LexerClass): boolean {

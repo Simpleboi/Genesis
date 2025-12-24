@@ -1,0 +1,13 @@
+void greet(string name) {
+    print("Hello, ");
+    print(name);
+}
+
+greet("World");
+
+int add(int x, int y) {
+    return x + y;
+}
+
+int sum = add(5, 3);
+print(sum);
