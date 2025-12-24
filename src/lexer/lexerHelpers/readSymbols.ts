@@ -68,6 +68,10 @@ export function readSymbols(lexer: LexerClass): boolean {
       lexer.addToken(TokenType.SEMICOLON, currentChar);
       lexer.advance();
       return true;
+    case ',':
+      lexer.addToken(TokenType.COMMA, currentChar);
+      lexer.advance();
+      return true;
     default:
       return false;
   }

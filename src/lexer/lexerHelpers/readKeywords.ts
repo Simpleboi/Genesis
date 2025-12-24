@@ -4,10 +4,7 @@ import { LexerClass } from '../lexer';
 const KEYWORDS = ['for', 'while', 'return', 'else'];
 const DATA_TYPES = ['int', 'float', 'string', 'char', 'bool', 'double'];
 
-/**
- * Read keywords, data types, and identifiers
- * Takes a LexerClass instance and operates on its state
- */
+// Read keywords, data types, and identifiers.
 export function readKeywords(lexer: LexerClass): boolean {
   let currentChar = lexer.peek();
 
@@ -34,6 +31,12 @@ export function readKeywords(lexer: LexerClass): boolean {
     switch (word) {
       case 'if':
         lexer.addToken(TokenType.IF, word);
+        break;
+      case 'else':
+        lexer.addToken(TokenType.ELSE, word);
+        break;
+      case 'return':
+        lexer.addToken(TokenType.RETURN, word);
         break;
       default:
         lexer.addToken(TokenType.KEYWORD, word);
