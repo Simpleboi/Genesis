@@ -5,11 +5,10 @@ import { parseProgram } from '../parser/parser';
 import { generateJS } from '../transpiler/transpiler';
 import { program } from 'commander';
 
-// Set the package info
 program
   .name('Genesis')
   .description('A CLI for the Genesis Language')
-  .version('0.9.3');
+  .version('0.9.4');
 
 // "Build" command: transpile .gen code to JS
 program

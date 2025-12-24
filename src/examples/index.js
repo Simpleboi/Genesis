@@ -1,2 +1,2 @@
-let num = 10;
-num = 30
+let num = 23;
+let x = num;
